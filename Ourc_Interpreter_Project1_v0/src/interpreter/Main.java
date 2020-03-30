@@ -5,15 +5,15 @@ public class Main {
   
   public static void main( String[] args ) throws Throwable {
     // 讀入uTestNum
-    User_interface.initPAL();
+    User_interface.InitPAL();
     // 測試testNum
     // System.out.println( "uTestNum is :" + uTestNum );
     // 初始化tokenStream
-    MyScanner myScanner = MyScanner.getMyScanner();
+    MyScanner myScanner = MyScanner.GetMyScanner();
     // 讀入使用者輸入
-    myScanner.getInputFromStream();
+    myScanner.GetInputFromStream();
     // 印出所有token Stream
-    myScanner.printAll();
-  }
+    myScanner.PrintAll();
+  } // main
   
 } // class Main

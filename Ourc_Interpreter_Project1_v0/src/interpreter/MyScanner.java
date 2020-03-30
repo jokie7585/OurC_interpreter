@@ -12,155 +12,156 @@ import java.util.Vector;
 
 public class MyScanner {
   
-  private static MyScanner singleTone_MyScanner;
-  private Vector<AlineOfToken> tokenStream = new Vector<AlineOfToken>();
-  private Scanner scanner = new Scanner( System.in );
-  private int currentPointerTo_tokenStream = 0;
-  private int basePointerTo_tokenStream = 0;
-  private int currentLine = 0;
+  private static MyScanner mSingleTone_MyScanner;
+  private Vector<AlineOfToken> mTokenStream = new Vector<AlineOfToken>();
+  private Scanner mScanner = new Scanner( System.in );
+  private int mCurrentPointerTo_tokenStream = 0;
+  private int mBasePointerTo_tokenStream = 0;
+  private int mCurrentLine = 0;
   
   /**
-   * Lock constructor.
+   * Lock constructor
    */
   private MyScanner() {
     
   } // MyScanner()
   
-  public static MyScanner getMyScanner() {
-    if ( singleTone_MyScanner == null )
-      singleTone_MyScanner = new MyScanner();
-    return singleTone_MyScanner;
-  } // getMyScanner()
+  public static MyScanner GetMyScanner() {
+    if ( mSingleTone_MyScanner == null )
+      mSingleTone_MyScanner = new MyScanner();
+    return mSingleTone_MyScanner;
+  } // GetMyScanner()
   
-  public Scanner getsscanner() {
-    return scanner;
-  } // getsscanner()
+  public Scanner Getsscanner() {
+    return mScanner;
+  } // Getsscanner()
   
   /**
    * return the token point by "currentPointer" in TokenStream. And move
-   * "currentPointer" to next token in Stream.
+   * "currentPointer" to next token in Stream
    */
-  public String get_NextToken() throws Throwable {
+  public String Get_NextToken() throws Throwable {
     // 先取出目前的line
-    AlineOfToken currentLine = tokenStream.elementAt( this.currentLine );
-    if ( currentPointerTo_tokenStream < currentLine.size() ) {
-      return currentLine.elementAt( currentPointerTo_tokenStream++ ).get();
+    AlineOfToken currentLine = mTokenStream.elementAt( this.mCurrentLine );
+    if ( mCurrentPointerTo_tokenStream < currentLine.Size() ) {
+      return currentLine.ElementAt( mCurrentPointerTo_tokenStream++ ).Get();
     }
     
     return null;
-  } // get_NextToken()
+  } // Get_NextToken()
   
   /**
-   * return the token point by "currentPointer" in TokenStream.
+   * return the token point by "currentPointer" in TokenStream
    */
-  public Token peek_NextToken() throws Throwable {
-    AlineOfToken currentLine = tokenStream.elementAt( this.currentLine );
-    if ( currentPointerTo_tokenStream < currentLine.size() ) {
-      return currentLine.elementAt( currentPointerTo_tokenStream );
+  public Token Peek_NextToken() throws Throwable {
+    AlineOfToken currentLine = mTokenStream.elementAt( this.mCurrentLine );
+    if ( mCurrentPointerTo_tokenStream < currentLine.Size() ) {
+      return currentLine.ElementAt( mCurrentPointerTo_tokenStream );
     }
     else {
-      if ( updateLine() ) {
-        currentLine = tokenStream.elementAt( this.currentLine );
-        return currentLine.elementAt( currentPointerTo_tokenStream );
+      if ( UpdateLine() ) {
+        currentLine = mTokenStream.elementAt( this.mCurrentLine );
+        return currentLine.ElementAt( mCurrentPointerTo_tokenStream );
       }
     }
     return null;
-  } // peek_NextToken()
+  } // Peek_NextToken()
   
-  public void skipLine() {
-    updateLine();
-  } // skipLine()
+  public void SkipLine() {
+    UpdateLine();
+  } // SkipLine()
   
-  public boolean updateLine() {
-    currentLine++;
-    while ( currentLine < tokenStream.size() ) {
+  public boolean UpdateLine() {
+    mCurrentLine++;
+    while ( mCurrentLine < mTokenStream.size() ) {
       
-      if ( tokenStream.elementAt( currentLine ).size() > 0 ) {
-        currentPointerTo_tokenStream = 0;
-        basePointerTo_tokenStream = 0;
+      if ( mTokenStream.elementAt( mCurrentLine ).Size() > 0 ) {
+        mCurrentPointerTo_tokenStream = 0;
+        mBasePointerTo_tokenStream = 0;
         return true;
       }
-      currentLine++;
+      mCurrentLine++;
       
     }
     
     return false;
     
-  } // updateLine()
+  } // UpdateLine()
   
   /**
    * When Parser find an executable command, parser call this function to update
-   * TokenStream's base(the index of the first unmatched token).
+   * TokenStream's base(the index of the first unmatched token)
    */
-  public void comfirmedACommand() throws Throwable {
-    basePointerTo_tokenStream = currentPointerTo_tokenStream;
-  } // comfirmedACommand()
+  public void ComfirmedACommand() throws Throwable {
+    mBasePointerTo_tokenStream = mCurrentPointerTo_tokenStream;
+  } // ComfirmedACommand()
   
-  public void setTokenStream_to_Base() throws Throwable {
-    currentPointerTo_tokenStream = basePointerTo_tokenStream;
-  } // setTokenStream_to_Base()
+  public void SetTokenStream_to_Base() throws Throwable {
+    mCurrentPointerTo_tokenStream = mBasePointerTo_tokenStream;
+  } // SetTokenStream_to_Base()
   
-  public void getInputFromStream() throws Throwable {
+  public void GetInputFromStream() throws Throwable {
     
     try {
-      while ( scanner.hasNext() ) {
-        tokenStream.add( new AlineOfToken() );
-        StringProcessor stringProcessor = new StringProcessor( scanner.nextLine() );
-        while ( stringProcessor.hasToken() ) {
-          tokenStream.elementAt( currentLine ).add( new Token( stringProcessor.getNextToken() ) );
+      while ( mScanner.hasNext() ) {
+        mTokenStream.add( new AlineOfToken() );
+        StringProcessor stringProcessor = new StringProcessor( mScanner.nextLine() );
+        while ( stringProcessor.HasToken() ) {
+          mTokenStream.elementAt( mCurrentLine ).Add( new Token( stringProcessor.GetNextToken() ) );
         }
-        currentLine++;
+        mCurrentLine++;
         
       }
       // 初始化 currentLine
-      currentLine = 0;
+      mCurrentLine = 0;
       
     } catch ( NoSuchElementException e ) {
       System.out.println( "dev_MyScanner.getInputFromStream() throws an exception!" );
       return;
     }
-  } // getInputFromStream()
+  } // GetInputFromStream()
   
   /**
    * init token stream
    */
-  public void flushStream() throws Throwable {
-    tokenStream = new Vector<AlineOfToken>();
-  } // flushStream()
+  public void FlushStream() throws Throwable {
+    mTokenStream = new Vector<AlineOfToken>();
+  } // FlushStream()
   
   /**
    * printAll tokens in token stream line by line
    */
-  public void printAll() throws Throwable {
-    for ( int j = 0 ; j < tokenStream.size() ; j++ ) {
-      AlineOfToken currentAline = tokenStream.elementAt( j );
+  public void PrintAll() throws Throwable {
+    for ( int j = 0 ; j < mTokenStream.size() ; j++ ) {
+      AlineOfToken currentAline = mTokenStream.elementAt( j );
       StringBuffer temp = new StringBuffer();
       temp.append( "line " + j + " : " );
       temp.append( "[" );
-      for ( int i = 0 ; i < currentAline.size() ; i++ ) {
-        temp.append( currentAline.elementAt( i ).get() + ", " );
+      for ( int i = 0 ; i < currentAline.Size() ; i++ ) {
+        temp.append( currentAline.ElementAt( i ).Get() + ", " );
       }
       temp.delete( temp.length() - 2, temp.length() );
       temp.append( " ]" );
       System.out.println( temp.toString() );
     }
     
-  } // printAll()
+  } // PrintAll()
   
 } // class MyScanner
 
 class AlineOfToken {
-  Vector<Token> alineOfTokens = new Vector<Token>();
+  Vector<Token> mAlineOfTokens = new Vector<Token>();
   
-  public int size() {
-    return alineOfTokens.size();
-  } // size()
+  public int Size() {
+    return mAlineOfTokens.size();
+  } // Size()
   
-  public Token elementAt( int index ) {
-    return alineOfTokens.elementAt( index );
-  } // elementAt()
+  public Token ElementAt( int index ) {
+    return mAlineOfTokens.elementAt( index );
+  } // ElementAt()
   
-  public void add( Token token ) {
-    alineOfTokens.add( token );
-  } // add()
+  public void Add( Token token ) {
+    mAlineOfTokens.add( token );
+  } // Add()
+  
 } // class AlineOfToken

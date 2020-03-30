@@ -1,25 +1,25 @@
 package interpreter;
 
 public class DelimiterTable {
-  public static char[] delimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'', '$', '%',
+  public static char[] mDelimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'', '$', '%',
       '@', '#', '&', '^', '-', '!' };
-  public static char[] enabled_delimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'' };
+  public static char[] mEnabled_delimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'' };
   
-  public static boolean is_delimiter( char character ) {
-    for ( int i = 0 ; i < delimiter.length ; i++ ) {
-      if ( delimiter[ i ] == character )
+  public static boolean Is_delimiter( char character ) {
+    for ( int i = 0 ; i < mDelimiter.length ; i++ ) {
+      if ( mDelimiter[ i ] == character )
         return true;
     }
     return false;
-  } // is_delimiter()
+  } // Is_delimiter()
   
-  public static boolean is_enabled_Delimiter( char character ) {
-    for ( int i = 0 ; i < delimiter.length ; i++ ) {
-      if ( enabled_delimiter[ i ] == character )
+  public static boolean Is_enabled_Delimiter( char character ) {
+    for ( int i = 0 ; i < mDelimiter.length ; i++ ) {
+      if ( mEnabled_delimiter[ i ] == character )
         return true;
     }
     
     return false;
-  } // is_enabled_Delimiter()
+  } // Is_enabled_Delimiter()
   
 } // class DelimiterTable
