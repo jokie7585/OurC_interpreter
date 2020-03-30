@@ -1,5 +1,13 @@
 package interpreter;
 
-public enum Terminal_symbol {
-  IDENT, NUM, STRING, RESERVED_WORD, Delimiter, SEMICOLON, R_parenthesis, L_parenthesis, BooleanOperator
+public class Terminal_symbol {
+	public static final Terminal_symbol IDENT;
+    public static final Terminal_symbol NUM;
+    public static final Terminal_symbol Delimiter;
+    
+    static {
+    	IDENT = new Terminal_symbol();
+    	NUM = new Terminal_symbol();
+    	Delimiter = new Terminal_symbol();
+    }
 }
