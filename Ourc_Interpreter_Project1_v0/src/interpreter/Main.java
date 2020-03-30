@@ -13,7 +13,7 @@ public class Main {
     // 讀入使用者輸入
     myScanner.getInputFromStream();
     // 印出所有token Stream
-    myScanner._dev_printAll();
+    myScanner.printAll();
   }
   
-}
+} // class Main

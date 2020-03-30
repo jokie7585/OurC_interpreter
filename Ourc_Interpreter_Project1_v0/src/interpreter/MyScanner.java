@@ -24,21 +24,17 @@ public class MyScanner {
    */
   private MyScanner() {
     
-  }
+  } // MyScanner()
   
-  /**
-   * 
-   * @return
-   */
   public static MyScanner getMyScanner() {
     if ( singleTone_MyScanner == null )
       singleTone_MyScanner = new MyScanner();
     return singleTone_MyScanner;
-  }
+  } // getMyScanner()
   
   public Scanner getsscanner() {
     return scanner;
-  }
+  } // getsscanner()
   
   /**
    * return the token point by "currentPointer" in TokenStream. And move
@@ -52,7 +48,7 @@ public class MyScanner {
     }
     
     return null;
-  }
+  } // get_NextToken()
   
   /**
    * return the token point by "currentPointer" in TokenStream.
@@ -69,11 +65,11 @@ public class MyScanner {
       }
     }
     return null;
-  }
+  } // peek_NextToken()
   
   public void skipLine() {
     updateLine();
-  }
+  } // skipLine()
   
   public boolean updateLine() {
     currentLine++;
@@ -90,7 +86,7 @@ public class MyScanner {
     
     return false;
     
-  }
+  } // updateLine()
   
   /**
    * When Parser find an executable command, parser call this function to update
@@ -98,20 +94,12 @@ public class MyScanner {
    */
   public void comfirmedACommand() throws Throwable {
     basePointerTo_tokenStream = currentPointerTo_tokenStream;
-  }
+  } // comfirmedACommand()
   
-  /**
-   * 當parser遇到無法繼續parse的情況，可以reset tokenStream 到上一次匹配到可執行指令之前的狀態。
-   */
   public void setTokenStream_to_Base() throws Throwable {
     currentPointerTo_tokenStream = basePointerTo_tokenStream;
-  }
+  } // setTokenStream_to_Base()
   
-  /**
-   * 從system.in讀入input, 並切成token製作成Token類存好。
-   * 
-   * @throws Throwable
-   */
   public void getInputFromStream() throws Throwable {
     
     try {
@@ -131,21 +119,19 @@ public class MyScanner {
       System.out.println( "dev_MyScanner.getInputFromStream() throws an exception!" );
       return;
     }
-  }
+  } // getInputFromStream()
   
   /**
-   * 清空scanner的緩存。
+   * init token stream
    */
-  public void flushStorage() throws Throwable {
+  public void flushStream() throws Throwable {
     tokenStream = new Vector<AlineOfToken>();
-  }
+  } // flushStream()
   
   /**
-   * printAll tokens in token stream with ',' as delimiter
-   * 
-   * @throws Throwable
+   * printAll tokens in token stream line by line
    */
-  public void _dev_printAll() throws Throwable {
+  public void printAll() throws Throwable {
     for ( int j = 0 ; j < tokenStream.size() ; j++ ) {
       AlineOfToken currentAline = tokenStream.elementAt( j );
       StringBuffer temp = new StringBuffer();
@@ -159,22 +145,22 @@ public class MyScanner {
       System.out.println( temp.toString() );
     }
     
-  }
+  } // printAll()
   
-  private class AlineOfToken {
-    Vector<Token> alineOfTokens = new Vector<Token>();
-    
-    public int size() {
-      return alineOfTokens.size();
-    }
-    
-    private Token elementAt( int index ) {
-      return alineOfTokens.elementAt( index );
-    }
-    
-    private void add( Token token ) {
-      alineOfTokens.add( token );
-    }
-  }
+} // class MyScanner
+
+class AlineOfToken {
+  Vector<Token> alineOfTokens = new Vector<Token>();
   
-}
+  public int size() {
+    return alineOfTokens.size();
+  } // size()
+  
+  public Token elementAt( int index ) {
+    return alineOfTokens.elementAt( index );
+  } // elementAt()
+  
+  public void add( Token token ) {
+    alineOfTokens.add( token );
+  } // add()
+} // class AlineOfToken

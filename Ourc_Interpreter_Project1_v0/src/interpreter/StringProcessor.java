@@ -25,7 +25,7 @@ public class StringProcessor {
   public StringProcessor( String instruction ) throws Throwable {
     insBuffer = new StringBuffer( instruction );
     deleteComment();
-  }
+  } // StringProcessor( String instruction )
   
   public String getNextToken() throws Throwable {
     
@@ -33,7 +33,8 @@ public class StringProcessor {
     skipWhiteSpace();
     while ( insBuffer.length() > 0 ) {
       
-      if ( !DelimiterTable.is_delimiter( insBuffer.charAt( 0 ) ) && !is_whiteSpace( insBuffer.charAt( 0 ) ) ) {
+      if ( !DelimiterTable.is_delimiter( insBuffer.charAt( 0 ) )
+          && !is_whiteSpace( insBuffer.charAt( 0 ) ) ) {
         tokenBuffer.append( insBuffer.charAt( 0 ) );
         insBuffer.delete( 0, 1 );
         if ( insBuffer.length() == 0 )
@@ -55,7 +56,7 @@ public class StringProcessor {
     }
     
     return null;
-  }
+  } // getNextToken()
   
   public boolean hasToken() throws Throwable {
     skipWhiteSpace();
@@ -63,11 +64,11 @@ public class StringProcessor {
       return true;
     }
     return false;
-  }
+  } // hasToken()
   
   public String getBuffer() throws Throwable {
     return insBuffer.toString();
-  }
+  } // getBuffer()
   
   public void skipWhiteSpace() throws Throwable {
     if ( insBuffer.length() > 0 ) {
@@ -77,7 +78,7 @@ public class StringProcessor {
           return;
       }
     }
-  }
+  } // skipWhiteSpace()
   
   public void deleteComment() throws Throwable {
     int i = 0, j = 1;
@@ -89,15 +90,16 @@ public class StringProcessor {
       j++;
     }
     
-  }
+  } // deleteComment()
   
   public static boolean is_whiteSpace( char character ) throws Throwable {
     char[] whiteSpace = { ' ', '\t', '\n' };
-    for ( char c : whiteSpace ) {
-      if ( character == c )
+    for ( int i = 0 ; i < whiteSpace.length ; i++ ) {
+      if ( character == whiteSpace[ i ] ) {
         return true;
+      }
     }
     return false;
-  }
+  } // is_whiteSpace( char character )
   
-}
+} // class StringProcessor

@@ -18,19 +18,16 @@ public class Token {
       // TODO: handle exception
       System.out.println( "asdasd" );
     }
-  }
+  } // Token()
   
   public String get() throws Throwable {
     return token;
-  }
+  } // get()
   
-  public Terminal_symbol typeOf() {
+  public Terminal_symbol symbolOf() {
     return typeOfSymbol;
-  }
+  } // typeOf()
   
-  /**
-   * this function used to analysis a token's type "set typeOfSymbol"
-   */
   private void tokenChecker() throws Throwable {
     if ( is_IDENT() ) {
       typeOfSymbol = Terminal_symbol.IDENT;
@@ -44,13 +41,8 @@ public class Token {
     else {
       throw new LexicalErrorException();
     }
-  }
+  } // tokenChecker()
   
-  /**
-   * if this.tokens 's Type == Terminal_symbol.IDENT
-   * 
-   * @return
-   */
   private boolean is_IDENT() throws Throwable {
     int i = 0;
     if ( is_letter( token.charAt( i ) ) ) {
@@ -69,13 +61,8 @@ public class Token {
     }
     
     return true;
-  }
+  } // is_IDENT()
   
-  /**
-   * if this.tokens 's Type == Terminal_symbol.NUM
-   * 
-   * @return
-   */
   private boolean is_NUM() throws Throwable {
     boolean dotFind = false;
     int i = 0;
@@ -103,18 +90,18 @@ public class Token {
       }
     }
     return true;
-  }
+  } // is_NUM()
   
   private boolean is_letter( char character ) throws Throwable {
     if ( ( character >= 65 && character <= 90 ) || ( character >= 97 && character <= 122 ) )
       return true;
     return false;
-  }
+  } // is_letter()
   
   private boolean is_digit( char character ) throws Throwable {
     if ( character >= 48 && character <= 57 )
       return true;
     return false;
-  }
+  } // is_digit()
   
-}
+} // class Token
