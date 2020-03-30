@@ -16,7 +16,7 @@ public class Token {
       TokenChecker();
     } catch ( LexicalErrorException e ) {
       // TODO: handle exception
-      System.out.println( "asdasd" );
+      System.out.println( e.ToString() );
     } // try/catch
   } // Token()
   
@@ -30,13 +30,13 @@ public class Token {
   
   private void TokenChecker() throws Throwable {
     if ( Is_IDENT() ) {
-      mTypeOfSymbol = Terminal_symbol.IDENT;
+      mTypeOfSymbol = Terminal_symbol.sIDENT;
     } // if
     else if ( Is_NUM() ) {
-      mTypeOfSymbol = Terminal_symbol.NUM;
+      mTypeOfSymbol = Terminal_symbol.sNUM;
     } // else if
     else if ( DelimiterTable.Is_enabled_Delimiter( mToken.charAt( 0 ) ) ) {
-      mTypeOfSymbol = Terminal_symbol.DELIMITER;
+      mTypeOfSymbol = Terminal_symbol.sDELIMITER;
     } // else if
     else {
       throw new LexicalErrorException();
@@ -90,6 +90,7 @@ public class Token {
         } // else
       } // else
     } // while
+    
     return true;
   } // Is_NUM()
   
@@ -97,6 +98,7 @@ public class Token {
     if ( ( character >= 65 && character <= 90 ) || ( character >= 97 && character <= 122 ) ) {
       return true;
     } // if
+    
     return false;
   } // Is_letter()
   
@@ -104,6 +106,7 @@ public class Token {
     if ( character >= 48 && character <= 57 ) {
       return true;
     } // if
+    
     return false;
   } // Is_digit()
   

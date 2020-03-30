@@ -1,7 +1,7 @@
 package interpreter;
 
 public class Main {
-  public static int uTestNum;
+  public static int suTestNum;
   
   public static void main( String[] args ) throws Throwable {
     // 讀入uTestNum

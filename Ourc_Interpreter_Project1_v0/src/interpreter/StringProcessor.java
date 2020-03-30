@@ -59,6 +59,7 @@ public class StringProcessor {
     if ( mInsBuffer.length() > 0 ) {
       return true;
     } // if
+    
     return false;
   } // HasToken()
   
@@ -95,6 +96,7 @@ public class StringProcessor {
         return true;
       } // if
     } // for
+    
     return false;
   } // is_whiteSpace( char character )
   

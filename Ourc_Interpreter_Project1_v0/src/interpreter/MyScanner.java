@@ -12,7 +12,7 @@ import java.util.Vector;
 
 public class MyScanner {
   
-  private static MyScanner mSingleTone_MyScanner;
+  private static MyScanner sSingleTone_MyScanner;
   private Vector<AlineOfToken> mTokenStream = new Vector<AlineOfToken>();
   private Scanner mScanner = new Scanner( System.in );
   private int mCurrentPointerTo_tokenStream = 0;
@@ -27,10 +27,10 @@ public class MyScanner {
   } // MyScanner()
   
   public static MyScanner GetMyScanner() {
-    if ( mSingleTone_MyScanner == null ) {
-      mSingleTone_MyScanner = new MyScanner();
+    if ( sSingleTone_MyScanner == null ) {
+      sSingleTone_MyScanner = new MyScanner();
     } // if
-    return mSingleTone_MyScanner;
+    return sSingleTone_MyScanner;
   } // GetMyScanner()
   
   public Scanner Getsscanner() {
