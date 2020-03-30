@@ -27,8 +27,9 @@ public class MyScanner {
   } // MyScanner()
   
   public static MyScanner GetMyScanner() {
-    if ( mSingleTone_MyScanner == null )
+    if ( mSingleTone_MyScanner == null ) {
       mSingleTone_MyScanner = new MyScanner();
+    } // if
     return mSingleTone_MyScanner;
   } // GetMyScanner()
   
@@ -45,7 +46,7 @@ public class MyScanner {
     AlineOfToken currentLine = mTokenStream.elementAt( this.mCurrentLine );
     if ( mCurrentPointerTo_tokenStream < currentLine.Size() ) {
       return currentLine.ElementAt( mCurrentPointerTo_tokenStream++ ).Get();
-    }
+    } // if
     
     return null;
   } // Get_NextToken()
@@ -57,13 +58,13 @@ public class MyScanner {
     AlineOfToken currentLine = mTokenStream.elementAt( this.mCurrentLine );
     if ( mCurrentPointerTo_tokenStream < currentLine.Size() ) {
       return currentLine.ElementAt( mCurrentPointerTo_tokenStream );
-    }
+    } // if
     else {
       if ( UpdateLine() ) {
         currentLine = mTokenStream.elementAt( this.mCurrentLine );
         return currentLine.ElementAt( mCurrentPointerTo_tokenStream );
-      }
-    }
+      } // if
+    } // else
     return null;
   } // Peek_NextToken()
   
@@ -79,10 +80,10 @@ public class MyScanner {
         mCurrentPointerTo_tokenStream = 0;
         mBasePointerTo_tokenStream = 0;
         return true;
-      }
+      } // if
       mCurrentLine++;
       
-    }
+    } // while
     
     return false;
     
@@ -108,17 +109,17 @@ public class MyScanner {
         StringProcessor stringProcessor = new StringProcessor( mScanner.nextLine() );
         while ( stringProcessor.HasToken() ) {
           mTokenStream.elementAt( mCurrentLine ).Add( new Token( stringProcessor.GetNextToken() ) );
-        }
+        } // while
         mCurrentLine++;
         
-      }
+      } // while
       // 初始化 currentLine
       mCurrentLine = 0;
       
     } catch ( NoSuchElementException e ) {
       System.out.println( "dev_MyScanner.getInputFromStream() throws an exception!" );
       return;
-    }
+    } // try/catch
   } // GetInputFromStream()
   
   /**
@@ -139,11 +140,11 @@ public class MyScanner {
       temp.append( "[" );
       for ( int i = 0 ; i < currentAline.Size() ; i++ ) {
         temp.append( currentAline.ElementAt( i ).Get() + ", " );
-      }
+      } // for
       temp.delete( temp.length() - 2, temp.length() );
       temp.append( " ]" );
       System.out.println( temp.toString() );
-    }
+    } // for
     
   } // PrintAll()
   
