@@ -8,12 +8,12 @@ package interpreter;
  */
 public class LexicalErrorException extends Exception {
   private static final long serialVersionUID = 1L;
-  String mTokenString;
+  char mTokenString;
   
   public LexicalErrorException() {
   } // LexicalErrorException()
   
-  public LexicalErrorException( String token ) {
+  public LexicalErrorException( char token ) {
     mTokenString = token;
   } // LexicalErrorException()
   

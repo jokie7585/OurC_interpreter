@@ -2,8 +2,9 @@ package interpreter;
 
 public class DelimiterTable {
   public static char[] sDelimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'', '$', '%',
-      '@', '#', '&', '^', '-', '!' };
-  public static char[] sEnabled_delimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'' };
+      '@', '#', '&', '^', '-', '!', '.' };
+  public static char[] sEnabled_delimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'',
+      '.' };
   
   public static boolean Is_delimiter( char character ) {
     for ( int i = 0 ; i < sDelimiter.length ; i++ ) {
@@ -16,7 +17,7 @@ public class DelimiterTable {
   } // Is_delimiter()
   
   public static boolean Is_enabled_Delimiter( char character ) {
-    for ( int i = 0 ; i < sDelimiter.length ; i++ ) {
+    for ( int i = 0 ; i < sEnabled_delimiter.length ; i++ ) {
       if ( sEnabled_delimiter[ i ] == character ) {
         return true;
       } // if

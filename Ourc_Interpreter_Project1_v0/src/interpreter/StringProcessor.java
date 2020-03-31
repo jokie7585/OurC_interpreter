@@ -37,7 +37,7 @@ public class StringProcessor {
         } // if
       } // if
       else {
-        if ( tokenBuffer.length() == 0 ) {
+        if ( tokenBuffer.length() == 0 && mInsBuffer.charAt( 0 ) != '.' ) {
           if ( !Is_whiteSpace( mInsBuffer.charAt( 0 ) ) ) {
             // delimiter found
             tokenBuffer.append( mInsBuffer.charAt( 0 ) );
@@ -45,6 +45,29 @@ public class StringProcessor {
             return tokenBuffer.toString();
           } // if
         } // if
+        else if ( mInsBuffer.charAt( 0 ) == '.' ) {
+          // 如果是 3.4 .4 3.
+          if ( Is_Num( tokenBuffer ) ) {
+            // 空白或數字
+            tokenBuffer.append( mInsBuffer.charAt( 0 ) );
+            mInsBuffer.delete( 0, 1 );
+            if ( mInsBuffer.length() > 0 ) {
+              if ( !Is_digit( mInsBuffer.charAt( 0 ) ) ) {
+                return tokenBuffer.toString();
+              } // if
+              else {
+                tokenBuffer.append( mInsBuffer.charAt( 0 ) );
+                mInsBuffer.delete( 0, 1 );
+              } // else
+            } // if
+            else {
+              return tokenBuffer.toString();
+            } // else
+          } // if
+          else {
+            return tokenBuffer.toString();
+          } // else
+        } // else if
         else {
           return tokenBuffer.toString();
         } // else
@@ -100,5 +123,23 @@ public class StringProcessor {
     
     return false;
   } // Is_whiteSpace()
+  
+  public static boolean Is_Num( StringBuffer buffer ) {
+    for ( int i = 0 ; i < buffer.length() ; i++ ) {
+      if ( !Is_digit( buffer.charAt( i ) ) ) {
+        return false;
+      } // if
+    } // for
+    
+    return true;
+  } // Is_Num()
+  
+  public static boolean Is_digit( char character ) {
+    if ( character >= 48 && character <= 57 ) {
+      return true;
+    } // if
+    
+    return false;
+  } // Is_digit()
   
 } // class StringProcessor
