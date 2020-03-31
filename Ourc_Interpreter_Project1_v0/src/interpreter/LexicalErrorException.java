@@ -19,6 +19,6 @@ public class LexicalErrorException extends Exception {
   
   public String ToString() {
     return "Unrecognized token with first char : '" + mTokenString + "'";
-  } // toString()
+  } // ToString()
   
 } // class LexicalErrorException

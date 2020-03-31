@@ -82,7 +82,8 @@ public class StringProcessor {
     while ( j < mInsBuffer.length() ) {
       if ( mInsBuffer.charAt( i ) == '/' && mInsBuffer.charAt( j ) == '/' ) {
         mInsBuffer.delete( i, mInsBuffer.length() );
-      }
+      } // if
+      
       i++;
       j++;
     } // while
@@ -98,6 +99,6 @@ public class StringProcessor {
     } // for
     
     return false;
-  } // is_whiteSpace( char character )
+  } // Is_whiteSpace()
   
 } // class StringProcessor

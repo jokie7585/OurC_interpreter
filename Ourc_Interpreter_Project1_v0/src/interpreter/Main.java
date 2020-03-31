@@ -14,6 +14,6 @@ public class Main {
     myScanner.GetInputFromStream();
     // 印出所有token Stream
     myScanner.PrintAll();
-  } // main
+  } // main()
   
 } // class Main

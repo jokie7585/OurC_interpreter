@@ -84,6 +84,7 @@ public class MyScanner {
         mBasePointerTo_tokenStream = 0;
         return true;
       } // if
+      
       mCurrentLine++;
       
     } // while
@@ -113,6 +114,7 @@ public class MyScanner {
         while ( stringProcessor.HasToken() ) {
           mTokenStream.elementAt( mCurrentLine ).Add( new Token( stringProcessor.GetNextToken() ) );
         } // while
+        
         mCurrentLine++;
         
       } // while
