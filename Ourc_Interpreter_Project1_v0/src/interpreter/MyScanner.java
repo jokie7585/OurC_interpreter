@@ -22,6 +22,7 @@ public class MyScanner {
   /**
    * Lock constructor
    */
+  
   private MyScanner() {
     
   } // MyScanner()
@@ -30,6 +31,7 @@ public class MyScanner {
     if ( sSingleTone_MyScanner == null ) {
       sSingleTone_MyScanner = new MyScanner();
     } // if
+    
     return sSingleTone_MyScanner;
   } // GetMyScanner()
   
@@ -65,6 +67,7 @@ public class MyScanner {
         return currentLine.ElementAt( mCurrentPointerTo_tokenStream );
       } // if
     } // else
+    
     return null;
   } // Peek_NextToken()
   
@@ -116,10 +119,11 @@ public class MyScanner {
       // 初始化 currentLine
       mCurrentLine = 0;
       
-    } catch ( NoSuchElementException e ) {
+    } // try
+    catch ( NoSuchElementException e ) {
       System.out.println( "dev_MyScanner.getInputFromStream() throws an exception!" );
       return;
-    } // try/catch
+    } // catch
   } // GetInputFromStream()
   
   /**
@@ -141,6 +145,7 @@ public class MyScanner {
       for ( int i = 0 ; i < currentAline.Size() ; i++ ) {
         temp.append( currentAline.ElementAt( i ).Get() + ", " );
       } // for
+      
       temp.delete( temp.length() - 2, temp.length() );
       temp.append( " ]" );
       System.out.println( temp.toString() );

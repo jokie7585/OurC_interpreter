@@ -20,7 +20,7 @@ public class StringProcessor {
   public StringProcessor( String instruction ) throws Throwable {
     mInsBuffer = new StringBuffer( instruction );
     DeleteComment();
-  } // StringProcessor( String instruction )
+  } // StringProcessor()
   
   public String GetNextToken() throws Throwable {
     

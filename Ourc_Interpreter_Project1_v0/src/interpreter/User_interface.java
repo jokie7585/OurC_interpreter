@@ -16,6 +16,6 @@ public class User_interface {
   
   public static void PrintResult( String string, DataType type ) throws Throwable {
     
-  } // PrintResult( String string, DataType type )
+  } // PrintResult()
   
 } // end class User_interface

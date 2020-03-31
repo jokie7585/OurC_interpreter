@@ -14,10 +14,10 @@ public class Token {
     this.mToken = token;
     try {
       TokenChecker();
-    } catch ( LexicalErrorException e ) {
-      // TODO: handle exception
+    } // try
+    catch ( LexicalErrorException e ) {
       System.out.println( e.ToString() );
-    } // try/catch
+    } // catch
   } // Token()
   
   public String Get() throws Throwable {
