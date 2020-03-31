@@ -1,12 +1,35 @@
 # OurC_interpreter
 PAL_project
 
-dev_v0.0
+
+## dev_v1.0
+v1.0 will finish PL project one, there are sth new.
+
+### new working class
+1. MyParser
+2. CommandWritter
+3. MyCPU
+    - fuctionCallStack
+    
+....
+
+### new DataStructure
+
+1. AssignCommand
+2. ComputingCommand
+3. PrintCommand
+....
+
+### availible Enum(class form)
+....
+
+## dev_v0.0
+the first edition of ourc interpreter.Only can read in sth....
 
 1. Myscanner
 2. PAL_uTestNum can work
 
-## important
+### important
 
 now these branch can work in PAL, But sth still cannot be done!
 
