@@ -130,14 +130,14 @@ public class MyParser {
         || mMyScanner.Peek_NextToken().Get().equals( ">" ) ) {
       booleanOperator.append( mMyScanner.Get_NextToken() );
       
-      if ( ">".contentEquals( booleanOperator ) ) {
+      if ( booleanOperator.toString().equals( ">" ) ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) ) {
           booleanOperator.append( mMyScanner.Get_NextToken() );
           return true;
         } // if
         
       } // else if
-      else if ( "<".contentEquals( booleanOperator ) ) {
+      else if ( booleanOperator.toString().equals( "<" ) ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) ) {
           booleanOperator.append( mMyScanner.Get_NextToken() );
           return true;
