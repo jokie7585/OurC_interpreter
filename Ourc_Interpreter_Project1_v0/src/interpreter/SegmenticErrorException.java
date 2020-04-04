@@ -15,4 +15,4 @@ public class SegmenticErrorException extends Exception {
   public String ToString() {
     return mErrorMassage;
   } // ToString()
-}
+} // class SegmenticErrorException

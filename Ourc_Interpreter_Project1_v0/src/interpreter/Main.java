@@ -59,7 +59,7 @@ public class Main {
     } // catch
     catch ( ProgramQuitException e ) {
       System.out.println( "> Program exits..." );
-    }
+    } // catch
   } // main()
   
 } // class Main

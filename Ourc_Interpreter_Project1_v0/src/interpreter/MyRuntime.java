@@ -7,10 +7,10 @@ import java.util.Vector;
 public class MyRuntime {
   private static MyRuntime sSingleton_MyRuntime = new MyRuntime();
   // Init RuntimeUnit
-  private MyCPU mMyCPU = MyCPU.GetMyCPU();
+  private MyCPU mMyCPU;
   
   private MyRuntime() {
-    
+    mMyCPU = MyCPU.GetMyCPU();
   } // MyRuntime()
   
   public static MyRuntime GetMyRuntime() {
@@ -28,12 +28,12 @@ public class MyRuntime {
     // } // catch
     
     mMyCPU.Run();
-  } // Run
+  } // Run()
   
   // append Command into callStack
   public void Push( Vector<Command> commands ) {
     mMyCPU.LoadCommand( commands );
-  } // Push
+  } // Push()
   
   public void InitCPU() {
     mMyCPU.InitCPU();
@@ -47,7 +47,7 @@ public class MyRuntime {
 class MyCPU {
   private static MyCPU sSingleton_MyCPU = new MyCPU();
   private Stack<Variable> mLocalVariables = new Stack<Variable>();
-  private Vector<Command> commands = new Vector<Command>();
+  private Vector<Command> mCommands = new Vector<Command>();
   
   private MyCPU() {
     
@@ -58,12 +58,14 @@ class MyCPU {
   } // GetMyCPU()
   
   public void LoadCommand( Vector<Command> commands ) {
-    this.commands.addAll( commands );
+    for ( int i = 0 ; i < commands.size() ; i++ ) {
+      mCommands.add( commands.elementAt( i ) );
+    } // for
   } // LoadCommand()
   
   public void Run() throws Throwable {
-    while ( !commands.isEmpty() ) {
-      Command tempCommand = commands.elementAt( 0 );
+    while ( !mCommands.isEmpty() ) {
+      Command tempCommand = mCommands.elementAt( 0 );
       if ( tempCommand.mCommnad_Type == Commnad_Type.sADD ) {
         Add( tempCommand );
       } // if
@@ -86,7 +88,7 @@ class MyCPU {
         BooleanOperation( tempCommand );
       } // else if
       
-      commands.remove( 0 );
+      mCommands.remove( 0 );
     } // while
     
     User_interface.PrintResult( mLocalVariables.pop() );
@@ -146,6 +148,10 @@ class MyCPU {
     // computing
     Variable addentVariable = mLocalVariables.pop();
     Variable agentVariable = mLocalVariables.pop();
+    // if div 0 Error
+    if ( addentVariable.GetVlue() == 0 ) {
+      throw new SegmenticErrorException();
+    } // if
     agentVariable.mValue = agentVariable.GetVlue() / addentVariable.GetVlue();
     // type check
     if ( agentVariable.mDataType.mPriority < addentVariable.mDataType.mPriority ) {
@@ -249,7 +255,7 @@ class MyCPU {
   
   public void InitCPU() {
     mLocalVariables = new Stack<Variable>();
-    commands = new Vector<Command>();
+    mCommands = new Vector<Command>();
   } // InitCPU
   
 } // class MyCPU

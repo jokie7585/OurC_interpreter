@@ -24,8 +24,9 @@ public class User_interface {
       } // else
     } // if
     else {
-      if ( Double.isInfinite( var.mValue ) || Double.isNaN( var.mValue ) ) {
-        throw new SegmenticErrorException();
+      if ( var.mDataType == DataType.sINT ) {
+        String tempString = var.mValue.toString();
+        System.out.println( tempString.substring( 0, tempString.length() - 2 ) );
       } // if
       else {
         System.out.println( String.format( "%.3f", var.mValue ) );

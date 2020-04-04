@@ -2,10 +2,10 @@ package interpreter;
 
 public class MyParser {
   private static MyParser sSingleTone_MyParser = new MyParser();
-  private MyScanner mMyScanner = MyScanner.GetMyScanner();
+  private MyScanner mMyScanner;
   
   private MyParser() {
-    
+    mMyScanner = MyScanner.GetMyScanner();
   } // MyParser()
   
   public static MyParser GetMyParser() {
