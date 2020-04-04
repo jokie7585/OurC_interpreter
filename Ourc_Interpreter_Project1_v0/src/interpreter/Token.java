@@ -20,6 +20,10 @@ public class Token {
   } // Token()
   
   public String Get() throws Throwable {
+    if ( mTypeOfSymbol == null ) {
+      TokenChecker();
+    } // if
+    
     return mToken;
   } // Get()
   

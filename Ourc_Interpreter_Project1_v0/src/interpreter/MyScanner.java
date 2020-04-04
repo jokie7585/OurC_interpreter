@@ -39,6 +39,15 @@ public class MyScanner {
     return mScanner;
   } // Getsscanner()
   
+  public boolean HasToken() {
+    if ( mCurrentLine < mTokenStream.size() ) {
+      return true;
+    } // if
+    else {
+      return false;
+    } // else
+  } // HasToken()
+  
   /**
    * return the token point by "currentPointer" in TokenStream. And move
    * "currentPointer" to next token in Stream
@@ -66,13 +75,21 @@ public class MyScanner {
         currentLine = mTokenStream.elementAt( this.mCurrentLine );
         return currentLine.ElementAt( mCurrentPointerTo_tokenStream );
       } // if
+      else {
+        throw new EndOfInputException();
+      } // else
     } // else
     
-    return null;
   } // Peek_NextToken()
   
-  public void SkipLine() {
-    UpdateLine();
+  public boolean SkipLine() throws Throwable {
+    if ( UpdateLine() ) {
+      return true;
+    } // if
+    else {
+      // 無input可讀 拋出此Error
+      throw new EndOfInputException();
+    } // else
   } // SkipLine()
   
   public boolean UpdateLine() {

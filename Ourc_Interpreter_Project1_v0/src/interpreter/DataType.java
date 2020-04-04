@@ -1,7 +1,15 @@
 package interpreter;
 
 public class DataType {
-  public static final Terminal_symbol sFLOAT = new Terminal_symbol();
-  public static final Terminal_symbol sINT = new Terminal_symbol();
-  public static final Terminal_symbol sSTRING = new Terminal_symbol();
+  int mPriority;
+  String mTypeString;
+  
+  public DataType( int priority, String string ) {
+    mPriority = priority;
+    mTypeString = string;
+  } // DataType()
+  
+  public static final DataType sFLOAT = new DataType( 2, "float" );
+  public static final DataType sINT = new DataType( 1, "int" );
+  public static final DataType sBOOLEAN = new DataType( 3, "bool" );
 } // class DataType
