@@ -67,10 +67,10 @@ class Command {
 
 // this class work as ENUM
 class Commnad_Type {
-  String typeString;
+  String mTypeString;
   
   public Commnad_Type( String typString ) {
-    this.typeString = typString;
+    this.mTypeString = typString;
   } // Commnad_Type()
   
   public static final Commnad_Type sPUSH = new Commnad_Type( "push" );
@@ -82,7 +82,7 @@ class Commnad_Type {
   public static final Commnad_Type sBOOLEANOPERATION = new Commnad_Type( "booleanOperation" );
   
   public String ToString() {
-    return typeString;
-  } // ToString
+    return mTypeString;
+  } // ToString()
   
 } // class Commnad_Type

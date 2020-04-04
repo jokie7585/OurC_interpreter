@@ -136,7 +136,7 @@ public class MyParser {
           return true;
         } // if
         
-      } // else if
+      } // if
       else if ( booleanOperator.toString().equals( "<" ) ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) ) {
           booleanOperator.append( mMyScanner.Get_NextToken() );
@@ -175,7 +175,7 @@ public class MyParser {
     
     return false;
     
-  }// NOT_ID_StartArithExp()
+  } // NOT_ID_StartArithExp()
   
   private boolean NOT_ID_StartTerm( CommandWritter writter ) throws Throwable {
     if ( NOT_ID_StartFactor( writter ) ) {
@@ -194,7 +194,7 @@ public class MyParser {
     
     return false;
     
-  }// NOT_ID_StartTerm()
+  } // NOT_ID_StartTerm()
   
   private boolean NOT_ID_StartFactor( CommandWritter writter ) throws Throwable {
     if ( Sign() || mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sNUM ) {
@@ -229,7 +229,7 @@ public class MyParser {
     } // else if
     
     return false;
-  }// NOT_ID_StartFactor()
+  } // NOT_ID_StartFactor()
   
   private boolean ArithExp( CommandWritter writter ) throws Throwable {
     if ( Term( writter ) ) {
@@ -247,7 +247,7 @@ public class MyParser {
     } // if
     
     return false;
-  }// ArithExp()
+  } // ArithExp()
   
   private boolean Term( CommandWritter writter ) throws Throwable {
     if ( Factor( writter ) ) {
@@ -265,7 +265,7 @@ public class MyParser {
     } // if
     
     return false;
-  }// Term()
+  } // Term()
   
   private boolean Factor( CommandWritter writter ) throws Throwable {
     if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sIDENT ) {
@@ -306,7 +306,7 @@ public class MyParser {
     } // else
     
     return false;
-  }// Factor()
+  } // Factor()
   
   private boolean Sign() throws Throwable {
     if ( mMyScanner.Peek_NextToken().Get().equals( "+" )

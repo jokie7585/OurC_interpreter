@@ -105,7 +105,7 @@ public class Token {
     } // if
     else {
       return false;
-    }
+    } // else
     
     return true;
   } // Is_NUM()

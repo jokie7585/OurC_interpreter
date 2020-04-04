@@ -34,7 +34,7 @@ public class Instruction {
   
   public void Insert( int index, Command command ) {
     mCommandStorage.insertElementAt( command, index );
-  } // Insert
+  } // Insert()
   
   public void PrintAll() {
     System.out.println( mInstructionType.TOString() );
@@ -57,11 +57,11 @@ class InstructionType {
   
   public InstructionType( String type ) {
     mTypeString = "Instruction : " + type;
-  }
+  } // InstructionType()
   
   public static final InstructionType sCOMPUTING = new InstructionType( "computing" );
   
   public String TOString() {
     return mTypeString;
-  }
+  } // TOString()
 } // class InstructionType

@@ -13,5 +13,5 @@ public class Terminal_symbol {
   
   public String TOString() {
     return mSymbolString;
-  } // TOString
+  } // TOString()
 } // class Terminal_symbol

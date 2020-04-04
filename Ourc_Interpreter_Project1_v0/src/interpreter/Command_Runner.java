@@ -17,14 +17,14 @@ public class Command_Runner {
   
   public void Run( Instruction instruction ) throws Throwable {
     if ( instruction.mInstructionType == InstructionType.sCOMPUTING ) {
-      Computing( ( Computing ) instruction );
-    }
-  } // Run
+      Compute( instruction );
+    } // if
+  } // Run()
   
-  private void Computing( Computing computing ) throws Throwable {
+  private void Compute( Instruction computing ) throws Throwable {
     mMyRuntime.Push( computing.GetAll() );
     mMyRuntime.Run();
-  } // Computing
+  } // Compute()
   
   // 初始化MyCPU
   public void Init() {

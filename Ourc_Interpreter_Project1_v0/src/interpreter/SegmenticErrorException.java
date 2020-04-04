@@ -6,11 +6,11 @@ public class SegmenticErrorException extends Exception {
   
   public SegmenticErrorException() {
     mErrorMassage = "Error";
-  } // LexicalErrorException()
+  } // SegmenticErrorException()
   
   public SegmenticErrorException( String token ) {
     mErrorMassage = "Undefined identifier : '" + token + "'";
-  } // LexicalErrorException()
+  } // SegmenticErrorException()
   
   public String ToString() {
     return mErrorMassage;
