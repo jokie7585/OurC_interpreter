@@ -184,8 +184,8 @@ class MyCPU {
     Variable leftVariable = mLocalVariables.pop();
     
     if ( command.mOperand.equals( "=" ) ) {
-      if ( leftVariable.GetVlue() - rightVariable.GetVlue() < 0.0001
-          || leftVariable.GetVlue() - rightVariable.GetVlue() < -0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001
+          || leftVariable.GetVlue() - rightVariable.GetVlue() >= -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
@@ -294,6 +294,18 @@ class Register {
     // undefined identity
     throw new SegmenticErrorException( literalString );
   } // Get()
+  
+  public boolean Is_Defined( String literalString ) throws Throwable {
+    
+    for ( int i = 0 ; i < mIdentTable.size() ; i++ ) {
+      if ( mIdentTable.elementAt( i ).mLiteralString.equals( literalString ) ) {
+        return true;
+      } // if
+    } // for
+    
+    // undefined identity
+    return false;
+  } // Is_Defined()
   
 } // class Register
 

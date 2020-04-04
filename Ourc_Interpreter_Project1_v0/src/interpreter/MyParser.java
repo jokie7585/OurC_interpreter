@@ -24,7 +24,9 @@ public class MyParser {
         throw new ProgramQuitException();
       } // if
       
-      writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sIDENT );
+      // 緩存 用以檢查
+      String tempString = mMyScanner.Get_NextToken();
+      writter.Write( tempString, Terminal_symbol.sIDENT );
       
       if ( mMyScanner.Peek_NextToken().Get().equals( ":" ) ) {
         String operatorString = mMyScanner.Get_NextToken();
@@ -38,9 +40,19 @@ public class MyParser {
           throw new SyntxErrorException( mMyScanner.Get_NextToken() );
         } // else
       } // if
-      else if ( IDlessArithExpOrBexp( writter ) ) {
-        
-      } // else if
+      else {
+        if ( mMyScanner.Peek_NextToken().Get().equals( "+" )
+            || mMyScanner.Peek_NextToken().Get().equals( "-" )
+            || mMyScanner.Peek_NextToken().Get().equals( "*" )
+            || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
+          if ( Register.sRegister.Is_Defined( tempString ) ) {
+            IDlessArithExpOrBexp( writter );
+          } // if
+          else {
+            throw new SegmenticErrorException( tempString );
+          } // else
+        } // if
+      } // else
       
       if ( mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
         mMyScanner.Get_NextToken();
@@ -269,6 +281,10 @@ public class MyParser {
   
   private boolean Factor( CommandWritter writter ) throws Throwable {
     if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sIDENT ) {
+      if ( !Register.sRegister.Is_Defined( mMyScanner.Peek_NextToken().Get() ) ) {
+        throw new SegmenticErrorException( mMyScanner.Peek_NextToken().Get() );
+      } // if
+      
       writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sIDENT );
       return true;
     } // if
