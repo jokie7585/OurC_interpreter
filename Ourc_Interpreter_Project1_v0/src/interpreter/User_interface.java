@@ -11,7 +11,7 @@ public class User_interface {
   } // InitPAL()
   
   public static void Generate_ProgramStart() {
-    System.out.println( "Program Starts..." );
+    System.out.println( "Program starts..." );
   } // Generate_ProgramStart()
   
   public static void PrintResult( Variable var ) throws Throwable {
@@ -24,12 +24,17 @@ public class User_interface {
       } // else
     } // if
     else {
+      if ( var.mValue == null ) {
+        var.GetVlue();
+      } // if
+      
       if ( var.mDataType == DataType.sINT ) {
         String tempString = var.mValue.toString();
-        System.out.println( tempString.substring( 0, tempString.length() - 2 ) );
+        System.out.println( "> " + tempString.substring( 0, tempString.length() - 2 ) );
       } // if
       else {
-        System.out.println( String.format( "%.3f", var.mValue ) );
+        String tempString = String.format( "%.3f", var.mValue );
+        System.out.println( "> " + tempString );
       } // else
       
     } // else
