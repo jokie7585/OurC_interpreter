@@ -10,7 +10,7 @@ public class MyParser {
   
   public static MyParser GetMyParser() {
     return sSingleTone_MyParser;
-  } // GetMyParser
+  } // GetMyParser()
   
   // parser get a instruction from tokenStream(MyScanner)
   public Instruction GetNextInstruction() throws Throwable {
@@ -169,6 +169,7 @@ public class MyParser {
         } // if
         
       } // while
+      
       return true;
     } // if
     
@@ -244,6 +245,7 @@ public class MyParser {
       
       return true;
     } // if
+    
     return false;
   }// ArithExp()
   

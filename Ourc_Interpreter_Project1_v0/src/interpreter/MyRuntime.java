@@ -152,6 +152,7 @@ class MyCPU {
     if ( addentVariable.GetVlue() == 0 ) {
       throw new SegmenticErrorException();
     } // if
+    
     agentVariable.mValue = agentVariable.GetVlue() / addentVariable.GetVlue();
     // type check
     if ( agentVariable.mDataType.mPriority < addentVariable.mDataType.mPriority ) {
@@ -236,7 +237,7 @@ class MyCPU {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = -1.0;
       } // else
-    }
+    } // else if
     else if ( command.mOperand.equals( "<=" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
@@ -256,7 +257,7 @@ class MyCPU {
   public void InitCPU() {
     mLocalVariables = new Stack<Variable>();
     mCommands = new Vector<Command>();
-  } // InitCPU
+  } // InitCPU()
   
 } // class MyCPU
 
@@ -280,7 +281,7 @@ class Register {
     } // for
     
     mIdentTable.add( variable );
-  } // Assign
+  } // Assign()
   
   public Variable Get( String literalString ) throws Throwable {
     

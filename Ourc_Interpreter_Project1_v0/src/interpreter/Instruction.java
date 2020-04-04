@@ -23,10 +23,13 @@ public class Instruction {
   
   public Vector<Command> GetAll() {
     return mCommandStorage;
-  } // GetAll
+  } // GetAll()
   
   public void AddFromCommandWriter( CommandWritter writter ) {
-    mCommandStorage.addAll( writter.Get() );
+    Vector<Command> tempCommands = writter.Get();
+    for ( int i = 0 ; i < tempCommands.size() ; i++ ) {
+      mCommandStorage.add( tempCommands.elementAt( i ) );
+    } // for
   } // AddFromCommandWriter()
   
   public void Insert( int index, Command command ) {
