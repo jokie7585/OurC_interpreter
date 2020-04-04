@@ -23,6 +23,9 @@ v1.0 will finish PL project one, there are sth new.
 ### availible Enum(class form)
 ....
 
+### implimented
+1. LexicalErrorException now is working. it might be throw when you call `Token.SymbolOf`.
+
 ## dev_v0.0
 the first edition of ourc interpreter.Only can read in sth....
 
