@@ -1,6 +1,13 @@
 # OurC_interpreter
 PAL_project
 
+## v5.0重大改版
+1. 變數不能以' _ ' 開頭。
+2. '_' 現在是 delimiter 了， 但不是合法的 token.
+
+_5 => unrecognized token with first char '_'
+
+
 ## v3.01
 Parser.BooleanOperator 修正。
 
