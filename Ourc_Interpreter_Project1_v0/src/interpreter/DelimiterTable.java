@@ -4,7 +4,7 @@ public class DelimiterTable {
   public static char[] sDelimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'', '$', '%',
       '@', '#', '&', '^', '-', '!', '.', ':' };
   public static String[] sEnabled_delimiter = { ";", "+", "-", "*", "/", ":=", ">", "<", "=", ">=", "<=",
-      "<>" };
+      "<>", "(", ")" };
   
   public static boolean Is_delimiter( char character ) {
     for ( int i = 0 ; i < sDelimiter.length ; i++ ) {

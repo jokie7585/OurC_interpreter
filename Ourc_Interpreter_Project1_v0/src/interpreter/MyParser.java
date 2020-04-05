@@ -40,7 +40,13 @@ public class MyParser {
         if ( mMyScanner.Peek_NextToken().Get().equals( "+" )
             || mMyScanner.Peek_NextToken().Get().equals( "-" )
             || mMyScanner.Peek_NextToken().Get().equals( "*" )
-            || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
+            || mMyScanner.Peek_NextToken().Get().equals( "/" )
+            || mMyScanner.Peek_NextToken().Get().equals( "=" )
+            || mMyScanner.Peek_NextToken().Get().equals( ">" )
+            || mMyScanner.Peek_NextToken().Get().equals( "<" )
+            || mMyScanner.Peek_NextToken().Get().equals( ">=" )
+            || mMyScanner.Peek_NextToken().Get().equals( "<=" )
+            || mMyScanner.Peek_NextToken().Get().equals( "<>" ) ) {
           if ( Register.sRegister.Is_Defined( tempString ) ) {
             IDlessArithExpOrBexp( writter );
           } // if

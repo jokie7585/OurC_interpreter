@@ -8,15 +8,14 @@ package interpreter;
  */
 
 public class StringProcessor {
-  /**
-   * The buffer stored a line of command
-   */
+  
+  // The buffer stored a line of command
+  
   private StringBuffer mInsBuffer; // a Line of command
   
-  /**
-   * constructor to build a String processor to parse a line to tokens by giving
-   * a String
-   */
+  // constructor to build a String processor to parse a line to tokens by
+  // giving a String
+  
   public StringProcessor( String instruction ) throws Throwable {
     mInsBuffer = new StringBuffer( instruction );
     DeleteComment();
@@ -51,18 +50,6 @@ public class StringProcessor {
             // 空白或數字
             tokenBuffer.append( mInsBuffer.charAt( 0 ) );
             mInsBuffer.delete( 0, 1 );
-            if ( mInsBuffer.length() > 0 ) {
-              if ( !Is_digit( mInsBuffer.charAt( 0 ) ) ) {
-                return tokenBuffer.toString();
-              } // if
-              else {
-                tokenBuffer.append( mInsBuffer.charAt( 0 ) );
-                mInsBuffer.delete( 0, 1 );
-              } // else
-            } // if
-            else {
-              return tokenBuffer.toString();
-            } // else
           } // if
           else {
             return tokenBuffer.toString();
@@ -73,6 +60,10 @@ public class StringProcessor {
         } // else
       } // else
     } // while
+    
+    if ( tokenBuffer.length() > 0 ) {
+      return tokenBuffer.toString();
+    } // if
     
     return null;
   } // GetNextToken()
