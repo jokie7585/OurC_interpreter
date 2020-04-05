@@ -58,7 +58,7 @@ public class StringProcessor {
         else if ( mInsBuffer.charAt( 0 ) == '_' ) {
           tokenBuffer.append( mInsBuffer.charAt( 0 ) );
           mInsBuffer.delete( 0, 1 );
-        } // else
+        } // else if
         else {
           return tokenBuffer.toString();
         } // else
