@@ -50,7 +50,7 @@ public class Token {
   
   private boolean Is_IDENT() throws LexicalErrorException {
     int i = 0;
-    if ( Is_letter( mToken.charAt( i ) ) || mToken.charAt( i ) == '_' ) {
+    if ( Is_letter( mToken.charAt( i ) ) ) {
       // first char must be a letter
       while ( i < mToken.length() ) {
         if ( Is_digit( mToken.charAt( i ) ) || Is_letter( mToken.charAt( i ) )

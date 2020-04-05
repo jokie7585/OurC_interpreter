@@ -29,8 +29,8 @@ public class User_interface {
       } // if
       
       if ( var.mDataType == DataType.sINT ) {
-        String tempString = var.mValue.toString();
-        System.out.println( "> " + tempString.substring( 0, tempString.length() - 2 ) );
+        String tempString = String.format( "%.0f", var.mValue );
+        System.out.println( "> " + tempString );
       } // if
       else {
         String tempString = String.format( "%.3f", var.mValue );

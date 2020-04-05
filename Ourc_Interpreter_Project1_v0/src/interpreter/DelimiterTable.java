@@ -1,8 +1,8 @@
 package interpreter;
 
 public class DelimiterTable {
-  public static char[] sDelimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '\"', '\'', '$', '%',
-      '@', '#', '&', '^', '-', '!', '.', ':' };
+  public static char[] sDelimiter = { ';', '(', ')', '+', '-', '*', '/', '>', '<', '=', '"', '\'', '$', '%',
+      '@', '#', '&', '^', '-', '!', '.', ':', '_' };
   public static String[] sEnabled_delimiter = { ";", "+", "-", "*", "/", ":=", ">", "<", "=", ">=", "<=",
       "<>", "(", ")" };
   
@@ -24,6 +24,6 @@ public class DelimiterTable {
     } // for
     
     return false;
-  } // Is_enabled_Delimiter()
+  } // Is_enabled_DelimiterToken()
   
 } // class DelimiterTable
