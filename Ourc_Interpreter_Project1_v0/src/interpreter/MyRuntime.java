@@ -159,6 +159,11 @@ class MyCPU {
       agentVariable.mDataType = addentVariable.mDataType;
     } // if
     
+    if ( agentVariable.mDataType == DataType.sINT ) {
+      String tempString = "" + agentVariable.mValue.intValue();
+      agentVariable.mValue = Double.parseDouble( tempString );
+    } // if
+    
     // 存回stack
     mLocalVariables.push( agentVariable );
     
