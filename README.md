@@ -1,6 +1,9 @@
 # OurC_interpreter
 PAL_project
 
+## v3.01
+Parser.BooleanOperator 修正。
+
 ## v.3.0 重大修正
 1. 修正 StringProcessor : 現在 StringProcessor 會 "盡可能" match 所有合法Token .e.g ':=' '<>' '.55' ..
   -> 基於上述修改 MyParser現在不需要再組裝 token , 每次都一定是 "盡可能match" 的 token.
