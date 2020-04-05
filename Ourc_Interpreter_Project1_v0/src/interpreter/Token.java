@@ -40,7 +40,7 @@ public class Token {
     else if ( Is_NUM() ) {
       mTypeOfSymbol = Terminal_symbol.sNUM;
     } // else if
-    else if ( DelimiterTable.Is_enabled_Delimiter( mToken.charAt( 0 ) ) ) {
+    else if ( DelimiterTable.Is_enabled_DelimiterToken( mToken ) ) {
       mTypeOfSymbol = Terminal_symbol.sDELIMITER;
     } // else if
     else {
