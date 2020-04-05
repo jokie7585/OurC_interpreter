@@ -135,11 +135,11 @@ public class MyParser {
   } // NOT_ID_StartArithExpOrBexp()
   
   private boolean BooleanOperator( StringBuffer booleanOperator ) throws Throwable {
-    if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) || mMyScanner.Peek_NextToken().Get().equals( "<" )
+    if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) || mMyScanner.Peek_NextToken().Get().equals( ">" )
         || mMyScanner.Peek_NextToken().Get().equals( ">=" )
         || mMyScanner.Peek_NextToken().Get().equals( "<>" )
         || mMyScanner.Peek_NextToken().Get().equals( "<=" )
-        || mMyScanner.Peek_NextToken().Get().equals( "<=" ) ) {
+        || mMyScanner.Peek_NextToken().Get().equals( "<" ) ) {
       
       booleanOperator.append( mMyScanner.Get_NextToken() );
       return true;
