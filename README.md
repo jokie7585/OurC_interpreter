@@ -1,6 +1,9 @@
 # OurC_interpreter
 PAL_project
 
+## 6.2
+Runtime 修正 布林運算。
+
 ## v5.0重大改版
 1. 變數不能以' _ ' 開頭。
 2. '_' 現在是 delimiter 了， 但不是合法的 token.
