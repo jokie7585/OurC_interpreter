@@ -125,7 +125,7 @@ public class MyScanner {
   public void GetInputFromStream() throws Throwable {
     
     try {
-      while ( mScanner.hasNextLine() ) {
+      while ( mScanner.hasNext() ) {
         mTokenStream.add( new AlineOfToken() );
         StringProcessor stringProcessor = new StringProcessor( mScanner.nextLine() );
         while ( stringProcessor.HasToken() ) {
