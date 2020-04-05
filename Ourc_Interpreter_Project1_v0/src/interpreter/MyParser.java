@@ -28,17 +28,14 @@ public class MyParser {
       String tempString = mMyScanner.Get_NextToken();
       writter.Write( tempString, Terminal_symbol.sIDENT );
       
-      if ( mMyScanner.Peek_NextToken().Get().equals( ":" ) ) {
+      if ( mMyScanner.Peek_NextToken().Get().equals( ":=" ) ) {
         String operatorString = mMyScanner.Get_NextToken();
-        if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) ) {
-          operatorString = operatorString + mMyScanner.Get_NextToken();
-          if ( ArithExp( writter ) ) {
-            writter.Write( operatorString, Terminal_symbol.sDELIMITER );
-          } // if
+        
+        operatorString = operatorString + mMyScanner.Get_NextToken();
+        if ( ArithExp( writter ) ) {
+          writter.Write( operatorString, Terminal_symbol.sDELIMITER );
         } // if
-        else {
-          throw new SyntxErrorException( mMyScanner.Get_NextToken() );
-        } // else
+        
       } // if
       else {
         if ( mMyScanner.Peek_NextToken().Get().equals( "+" )
@@ -139,28 +136,12 @@ public class MyParser {
   
   private boolean BooleanOperator( StringBuffer booleanOperator ) throws Throwable {
     if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) || mMyScanner.Peek_NextToken().Get().equals( "<" )
-        || mMyScanner.Peek_NextToken().Get().equals( ">" ) ) {
+        || mMyScanner.Peek_NextToken().Get().equals( ">=" )
+        || mMyScanner.Peek_NextToken().Get().equals( "<>" )
+        || mMyScanner.Peek_NextToken().Get().equals( "<=" )
+        || mMyScanner.Peek_NextToken().Get().equals( "<=" ) ) {
+      
       booleanOperator.append( mMyScanner.Get_NextToken() );
-      
-      if ( booleanOperator.toString().equals( ">" ) ) {
-        if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) ) {
-          booleanOperator.append( mMyScanner.Get_NextToken() );
-          return true;
-        } // if
-        
-      } // if
-      else if ( booleanOperator.toString().equals( "<" ) ) {
-        if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) ) {
-          booleanOperator.append( mMyScanner.Get_NextToken() );
-          return true;
-        } // if
-        else if ( mMyScanner.Peek_NextToken().Get().equals( ">" ) ) {
-          booleanOperator.append( mMyScanner.Get_NextToken() );
-          return true;
-        } // else if
-        
-      } // else if
-      
       return true;
     } // if
     

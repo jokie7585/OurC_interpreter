@@ -40,8 +40,8 @@ public class StringProcessor {
         if ( tokenBuffer.length() == 0 && mInsBuffer.charAt( 0 ) != '.' ) {
           if ( !Is_whiteSpace( mInsBuffer.charAt( 0 ) ) ) {
             // delimiter found
-            tokenBuffer.append( mInsBuffer.charAt( 0 ) );
-            mInsBuffer.delete( 0, 1 );
+            // match delimiter token greedy!
+            DelimiterMatcher( mInsBuffer, tokenBuffer );
             return tokenBuffer.toString();
           } // if
         } // if
@@ -141,5 +141,30 @@ public class StringProcessor {
     
     return false;
   } // Is_digit()
+  
+  public static void DelimiterMatcher( StringBuffer insBuffer, StringBuffer delimitermatcherBuffer ) {
+    delimitermatcherBuffer.append( insBuffer.charAt( 0 ) );
+    insBuffer.deleteCharAt( 0 );
+    if ( delimitermatcherBuffer.toString().equals( ":" ) && insBuffer.length() > 0 ) {
+      if ( insBuffer.charAt( 0 ) == '=' ) {
+        delimitermatcherBuffer.append( insBuffer.charAt( 0 ) );
+        insBuffer.deleteCharAt( 0 );
+      } // if
+    } // if
+    else if ( delimitermatcherBuffer.toString().equals( "<" ) && insBuffer.length() > 0 ) {
+      if ( insBuffer.charAt( 0 ) == '=' || insBuffer.charAt( 0 ) == '>' ) {
+        delimitermatcherBuffer.append( insBuffer.charAt( 0 ) );
+        insBuffer.deleteCharAt( 0 );
+      } // if
+    } // else if
+    else if ( delimitermatcherBuffer.toString().equals( ">" ) && insBuffer.length() > 0 ) {
+      if ( insBuffer.charAt( 0 ) == '=' ) {
+        delimitermatcherBuffer.append( insBuffer.charAt( 0 ) );
+        insBuffer.deleteCharAt( 0 );
+      } // if
+    } // else if
+    
+    return;
+  } // DelimiterMatcher()
   
 } // class StringProcessor
