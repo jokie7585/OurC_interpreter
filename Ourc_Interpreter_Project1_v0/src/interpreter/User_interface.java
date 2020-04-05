@@ -30,10 +30,20 @@ public class User_interface {
       
       if ( var.mDataType == DataType.sINT ) {
         String tempString = String.format( "%.0f", var.mValue );
+        
+        if ( var.mValue == 0 && tempString.charAt( 0 ) == '-' ) {
+          tempString = tempString.substring( 1 );
+        } // if
+        
         System.out.println( "> " + tempString );
       } // if
       else {
         String tempString = String.format( "%.3f", var.mValue );
+        
+        if ( var.mValue == 0 && tempString.charAt( 0 ) == '-' ) {
+          tempString = tempString.substring( 1 );
+        } // if
+        
         System.out.println( "> " + tempString );
       } // else
       
