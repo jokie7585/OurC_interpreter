@@ -31,7 +31,6 @@ public class MyParser {
       if ( mMyScanner.Peek_NextToken().Get().equals( ":=" ) ) {
         String operatorString = mMyScanner.Get_NextToken();
         
-        operatorString = operatorString + mMyScanner.Get_NextToken();
         if ( ArithExp( writter ) ) {
           writter.Write( operatorString, Terminal_symbol.sDELIMITER );
         } // if
