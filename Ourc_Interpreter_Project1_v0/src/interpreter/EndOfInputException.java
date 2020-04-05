@@ -7,6 +7,6 @@ public class EndOfInputException extends Exception {
   // 請全面修改MyScanner 用 getChar的方式找一個完整的line
   
   public String ToString() {
-    return "> Program exits...";
+    return "Program exits...";
   } // ToString()
 } // class EndOfInputException

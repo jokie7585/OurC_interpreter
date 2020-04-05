@@ -195,8 +195,8 @@ class MyCPU {
       } // else
     } // if
     else if ( command.mOperand.equals( "<>" ) ) {
-      if ( leftVariable.GetVlue() - rightVariable.GetVlue() >= 0.0001
-          || leftVariable.GetVlue() - rightVariable.GetVlue() <= -0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() > 0.0001
+          || leftVariable.GetVlue() - rightVariable.GetVlue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
