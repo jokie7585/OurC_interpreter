@@ -211,7 +211,7 @@ public class MyParser {
         writter.Write( operandString, Terminal_symbol.sNUM );
       } // if
       else {
-        throw new SyntxErrorException( operandString );
+        throw new SyntxErrorException( mMyScanner.Get_NextToken() );
       } // else
       
       return true;
@@ -293,7 +293,7 @@ public class MyParser {
         writter.Write( operandString, Terminal_symbol.sNUM );
       } // if
       else {
-        throw new SyntxErrorException( operandString );
+        throw new SyntxErrorException( mMyScanner.Get_NextToken() );
       } // else
       
       return true;
