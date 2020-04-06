@@ -1,6 +1,11 @@
 # OurC_interpreter
 PAL_project
 
+## v.7.0
+
+現在 token 已經完全等於 "Terminal Symbol" 了
+
+
 ## 6.2
 Runtime 修正 布林運算。
 
