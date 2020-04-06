@@ -34,6 +34,9 @@ public class MyParser {
         if ( ArithExp( writter ) ) {
           writter.Write( operatorString, Terminal_symbol.sDELIMITER );
         } // if
+        else {
+          throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+        } // else
         
       } // if
       else {
@@ -207,6 +210,9 @@ public class MyParser {
         // push NUM
         writter.Write( operandString, Terminal_symbol.sNUM );
       } // if
+      else {
+        throw new SyntxErrorException( operandString );
+      } // else
       
       return true;
     } // if
@@ -286,6 +292,9 @@ public class MyParser {
         // push NUM
         writter.Write( operandString, Terminal_symbol.sNUM );
       } // if
+      else {
+        throw new SyntxErrorException( operandString );
+      } // else
       
       return true;
     } // else if
