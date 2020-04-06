@@ -131,7 +131,7 @@ public class StringProcessor {
       } // else
     } // while
     
-  } // IdentMatcher
+  } // IdentMatcher()
   
   private static void NumMatcher( StringBuffer insBuffer, StringBuffer numMatchermatcherBuffer ) {
     boolean dotFind = false;
@@ -162,7 +162,7 @@ public class StringProcessor {
       } // else
     } // while
     
-  } // NumMatcher
+  } // NumMatcher()
   
   private static void DelimiterMatcher( StringBuffer insBuffer, StringBuffer delimitermatcherBuffer ) {
     delimitermatcherBuffer.append( insBuffer.charAt( 0 ) );
