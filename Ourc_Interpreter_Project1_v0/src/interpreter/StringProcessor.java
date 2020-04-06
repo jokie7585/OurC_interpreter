@@ -24,52 +24,24 @@ public class StringProcessor {
   public String GetNextToken() throws Throwable {
     
     StringBuffer tokenBuffer = new StringBuffer();
-    SkipWhiteSpace();
+    
     while ( mInsBuffer.length() > 0 ) {
-      
-      if ( !DelimiterTable.Is_delimiter( mInsBuffer.charAt( 0 ) )
-          && !Is_whiteSpace( mInsBuffer.charAt( 0 ) ) ) {
-        tokenBuffer.append( mInsBuffer.charAt( 0 ) );
-        mInsBuffer.delete( 0, 1 );
-        if ( mInsBuffer.length() == 0 ) {
-          return tokenBuffer.toString();
-        } // if
+      SkipWhiteSpace();
+      if ( Is_digit( mInsBuffer.charAt( 0 ) ) || mInsBuffer.charAt( 0 ) == '.' ) {
+        NumMatcher( mInsBuffer, tokenBuffer );
       } // if
+      else if ( Is_letter( mInsBuffer.charAt( 0 ) ) ) {
+        IdentMatcher( mInsBuffer, tokenBuffer );
+      } // else if
       else {
-        if ( tokenBuffer.length() == 0 && mInsBuffer.charAt( 0 ) != '.' ) {
-          if ( !Is_whiteSpace( mInsBuffer.charAt( 0 ) ) ) {
-            // delimiter found
-            // match delimiter token greedy!
-            DelimiterMatcher( mInsBuffer, tokenBuffer );
-            return tokenBuffer.toString();
-          } // if
-        } // if
-        else if ( mInsBuffer.charAt( 0 ) == '.' ) {
-          // 如果是 3.4 .4 3.
-          if ( Is_Num( tokenBuffer ) ) {
-            // 空白或數字
-            tokenBuffer.append( mInsBuffer.charAt( 0 ) );
-            mInsBuffer.delete( 0, 1 );
-          } // if
-          else {
-            return tokenBuffer.toString();
-          } // else
-        } // else if
-        else if ( mInsBuffer.charAt( 0 ) == '_' ) {
-          tokenBuffer.append( mInsBuffer.charAt( 0 ) );
-          mInsBuffer.delete( 0, 1 );
-        } // else if
-        else {
-          return tokenBuffer.toString();
-        } // else
+        // delimiter
+        DelimiterMatcher( mInsBuffer, tokenBuffer );
       } // else
+      
+      return tokenBuffer.toString();
     } // while
     
-    if ( tokenBuffer.length() > 0 ) {
-      return tokenBuffer.toString();
-    } // if
-    
-    return null;
+    throw new EndOfInputException();
   } // GetNextToken()
   
   public boolean HasToken() throws Throwable {
@@ -137,7 +109,62 @@ public class StringProcessor {
     return false;
   } // Is_digit()
   
-  public static void DelimiterMatcher( StringBuffer insBuffer, StringBuffer delimitermatcherBuffer ) {
+  private static boolean Is_letter( char character ) {
+    if ( ( character >= 65 && character <= 90 ) || ( character >= 97 && character <= 122 ) ) {
+      return true;
+    } // if
+    
+    return false;
+  } // Is_letter()
+  
+  private static void IdentMatcher( StringBuffer insBuffer, StringBuffer identMatchermatcherBuffer ) {
+    identMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
+    insBuffer.deleteCharAt( 0 );
+    while ( insBuffer.length() > 0 ) {
+      if ( Is_letter( insBuffer.charAt( 0 ) ) || Is_digit( insBuffer.charAt( 0 ) )
+          || insBuffer.charAt( 0 ) == '_' ) {
+        identMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
+        insBuffer.deleteCharAt( 0 );
+      } // if
+      else {
+        return;
+      } // else
+    } // while
+    
+  } // IdentMatcher
+  
+  private static void NumMatcher( StringBuffer insBuffer, StringBuffer numMatchermatcherBuffer ) {
+    boolean dotFind = false;
+    numMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
+    insBuffer.deleteCharAt( 0 );
+    while ( insBuffer.length() > 0 ) {
+      if ( Is_digit( insBuffer.charAt( 0 ) ) || insBuffer.charAt( 0 ) == '.' ) {
+        if ( !dotFind ) {
+          if ( insBuffer.charAt( 0 ) == '.' ) {
+            dotFind = true;
+          } // if
+          
+          numMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
+          insBuffer.deleteCharAt( 0 );
+        } // if
+        else {
+          if ( insBuffer.charAt( 0 ) == '.' ) {
+            return;
+          } // if
+          else {
+            numMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
+            insBuffer.deleteCharAt( 0 );
+          } // else
+        } // else
+      } // if
+      else {
+        return;
+      } // else
+    } // while
+    
+  } // NumMatcher
+  
+  private static void DelimiterMatcher( StringBuffer insBuffer, StringBuffer delimitermatcherBuffer ) {
     delimitermatcherBuffer.append( insBuffer.charAt( 0 ) );
     insBuffer.deleteCharAt( 0 );
     if ( delimitermatcherBuffer.toString().equals( ":" ) && insBuffer.length() > 0 ) {

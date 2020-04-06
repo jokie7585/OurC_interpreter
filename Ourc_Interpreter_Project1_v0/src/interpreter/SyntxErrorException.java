@@ -2,7 +2,6 @@ package interpreter;
 
 public class SyntxErrorException extends Exception {
   
-  private static final long serialVersionUID = 1L;
   String mTokenString;
   
   public SyntxErrorException() {

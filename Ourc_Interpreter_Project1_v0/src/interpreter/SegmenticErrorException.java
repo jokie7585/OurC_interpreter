@@ -1,7 +1,7 @@
 package interpreter;
 
 public class SegmenticErrorException extends Exception {
-  private static final long serialVersionUID = 1L;
+  
   String mErrorMassage;
   
   public SegmenticErrorException() {
