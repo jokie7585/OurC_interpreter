@@ -88,9 +88,9 @@ class MyCPU {
       else if ( tempCommand.mCommnad_Type == Commnad_Type.sBOOLEANOPERATION ) {
         BooleanOperation( tempCommand );
       } // else if
-      else if ( tempCommand.mCommnad_Type == Commnad_Type.sSWITCHMODE ) {
-        Switch( tempCommand );
-      } // else if
+      // else if ( tempCommand.mCommnad_Type == Commnad_Type.sSWITCHMODE ) {
+      // Switch( tempCommand );
+      // } // else if
       
       mCommands.remove( 0 );
     } // while
@@ -167,14 +167,14 @@ class MyCPU {
       agentVariable.mDataType = addentVariable.mDataType;
     } // if
     
-    if ( mMode ) {
-      agentVariable.mDataType = DataType.sFLOAT;
-    } // if
-    
-    if ( agentVariable.mDataType == DataType.sINT ) {
-      String tempString = "" + agentVariable.mValue.intValue();
-      agentVariable.mValue = Double.parseDouble( tempString );
-    } // if
+    // if ( mMode ) {
+    // agentVariable.mDataType = DataType.sFLOAT;
+    // } // if
+    //
+    // if ( agentVariable.mDataType == DataType.sINT ) {
+    // String tempString = "" + agentVariable.mValue.intValue();
+    // agentVariable.mValue = Double.parseDouble( tempString );
+    // } // if
     
     // 存回stack
     mLocalVariables.push( agentVariable );

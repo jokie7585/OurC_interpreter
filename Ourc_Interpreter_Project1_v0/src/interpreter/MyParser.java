@@ -300,7 +300,7 @@ public class MyParser {
     } // else if
     else if ( mMyScanner.Peek_NextToken().Get().equals( "(" ) ) {
       // read in and abandon Left parenthesis
-      System.out.println( "in" );
+      
       writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER );
       
       if ( ArithExp( writter ) ) {
