@@ -1,20 +1,15 @@
 package interpreter;
 
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.Vector;
 
-/**
- * 
- * @author tsaipengying
- *
- */
+import CYICE.ICEInputStream;
 
 public class MyScanner {
   
   private static MyScanner sSingleTone_MyScanner;
   private Vector<AlineOfToken> mTokenStream = new Vector<AlineOfToken>();
-  private Scanner mScanner = new Scanner( System.in );
+  // private Scanner mScanner = new Scanner( System.in );
   private int mCurrentPointerTo_tokenStream = 0;
   private int mBasePointerTo_tokenStream = 0;
   private int mCurrentLine = 0;
@@ -35,9 +30,9 @@ public class MyScanner {
     return sSingleTone_MyScanner;
   } // GetMyScanner()
   
-  public Scanner Getsscanner() {
-    return mScanner;
-  } // Getsscanner()
+  // public Scanner Getsscanner() {
+  // return mScanner;
+  // } // Getsscanner()
   
   public boolean HasToken() {
     if ( mCurrentLine < mTokenStream.size() ) {
@@ -122,12 +117,27 @@ public class MyScanner {
     mCurrentPointerTo_tokenStream = mBasePointerTo_tokenStream;
   } // SetTokenStream_to_Base()
   
+  public String findLine( ICEInputStream in ) throws Throwable {
+    char temp = in.ReadChar();
+    StringBuffer tempBuffer = new StringBuffer();
+    tempBuffer.append( temp );
+    while ( !in.AtEOF() && temp != '\n' ) {
+      temp = in.ReadChar();
+      tempBuffer.append( temp );
+    } // while
+    
+    return tempBuffer.toString();
+  } // findLine()
+  
   public void GetInputFromStream() throws Throwable {
+    ICEInputStream stdIn = new ICEInputStream();
+    stdIn.ReadInt();
     
     try {
-      while ( mScanner.hasNext() ) {
+      while ( !stdIn.AtEOF() ) {
+        
         mTokenStream.add( new AlineOfToken() );
-        StringProcessor stringProcessor = new StringProcessor( mScanner.nextLine() );
+        StringProcessor stringProcessor = new StringProcessor( findLine( stdIn ) );
         while ( stringProcessor.HasToken() ) {
           mTokenStream.elementAt( mCurrentLine ).Add( new Token( stringProcessor.GetNextToken() ) );
         } // while

@@ -118,9 +118,6 @@ public class StringProcessor {
   } // Is_letter()
   
   private static void IdentMatcher( StringBuffer insBuffer, StringBuffer identMatchermatcherBuffer ) {
-    if ( Is_quit( insBuffer, identMatchermatcherBuffer ) ) {
-      return;
-    } // if
     
     identMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
     insBuffer.deleteCharAt( 0 );
@@ -139,8 +136,7 @@ public class StringProcessor {
   
   private static void NumMatcher( StringBuffer insBuffer, StringBuffer numMatchermatcherBuffer ) {
     boolean dotFind = false;
-    numMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
-    insBuffer.deleteCharAt( 0 );
+    
     while ( insBuffer.length() > 0 ) {
       if ( Is_digit( insBuffer.charAt( 0 ) ) || insBuffer.charAt( 0 ) == '.' ) {
         if ( !dotFind ) {
@@ -192,35 +188,5 @@ public class StringProcessor {
     
     return;
   } // DelimiterMatcher()
-  
-  private static boolean Is_quit( StringBuffer insBuffer, StringBuffer quitmatcherBuffer ) {
-    StringBuffer tempMatcher = new StringBuffer();
-    StringBuffer tempIns = new StringBuffer( insBuffer.toString() );
-    
-    if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'q' ) {
-      tempMatcher.append( tempIns.charAt( 0 ) );
-      tempIns.deleteCharAt( 0 );
-      
-      if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'u' ) {
-        tempMatcher.append( tempIns.charAt( 0 ) );
-        tempIns.deleteCharAt( 0 );
-        
-        if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'i' ) {
-          tempMatcher.append( tempIns.charAt( 0 ) );
-          tempIns.deleteCharAt( 0 );
-        } // if
-        
-        if ( insBuffer.length() > 0 && insBuffer.charAt( 0 ) == 't' ) {
-          tempMatcher.append( insBuffer.charAt( 0 ) );
-          tempIns.deleteCharAt( 0 );
-          quitmatcherBuffer.append( tempMatcher.toString() );
-          insBuffer.delete( 0, 4 );
-          return true;
-        } // if
-      } // if
-    } // if
-    
-    return false;
-  } // Is_quit()
   
 } // class StringProcessor

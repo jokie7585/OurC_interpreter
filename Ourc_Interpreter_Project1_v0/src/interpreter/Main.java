@@ -5,7 +5,7 @@ public class Main {
   
   public static void main( String[] args ) throws Throwable {
     // 讀入uTestNum
-    User_interface.InitPAL();
+    // User_interface.InitPAL();
     // 測試testNum
     // System.out.println( "uTestNum is :" + uTestNum );
     // 初始化tokenStream
