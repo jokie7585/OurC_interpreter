@@ -194,27 +194,31 @@ public class StringProcessor {
   } // DelimiterMatcher()
   
   private static boolean Is_quit( StringBuffer insBuffer, StringBuffer quitmatcherBuffer ) {
-    if ( insBuffer.charAt( 0 ) == 'q' ) {
-      quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
+    StringBuffer tempMatcher = new StringBuffer();
+    StringBuffer tempIns = new StringBuffer( insBuffer.toString() );
+    
+    if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'q' ) {
+      tempMatcher.append( tempIns.charAt( 0 ) );
       insBuffer.deleteCharAt( 0 );
-      if ( insBuffer.charAt( 0 ) == 'u' ) {
-        quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
-        insBuffer.deleteCharAt( 0 );
-        if ( insBuffer.charAt( 0 ) == 'i' ) {
-          quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
-          insBuffer.deleteCharAt( 0 );
+      
+      if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'u' ) {
+        tempMatcher.append( tempIns.charAt( 0 ) );
+        tempIns.deleteCharAt( 0 );
+        
+        if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'i' ) {
+          tempMatcher.append( tempIns.charAt( 0 ) );
+          tempIns.deleteCharAt( 0 );
         } // if
-        if ( insBuffer.charAt( 0 ) == 't' ) {
-          quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
-          insBuffer.deleteCharAt( 0 );
+        
+        if ( insBuffer.length() > 0 && insBuffer.charAt( 0 ) == 't' ) {
+          tempMatcher.append( insBuffer.charAt( 0 ) );
+          tempIns.deleteCharAt( 0 );
+          quitmatcherBuffer.append( tempMatcher.toString() );
+          insBuffer.delete( 0, 4 );
           return true;
         } // if
       } // if
     } // if
-    
-    // not quit
-    insBuffer = new StringBuffer( quitmatcherBuffer.append( insBuffer.toString() ).toString() );
-    quitmatcherBuffer = new StringBuffer();
     
     return false;
   } // Is_quit()
