@@ -117,7 +117,7 @@ public class MyScanner {
     mCurrentPointerTo_tokenStream = mBasePointerTo_tokenStream;
   } // SetTokenStream_to_Base()
   
-  public String findLine( ICEInputStream in ) throws Throwable {
+  public String FindLine( ICEInputStream in ) throws Throwable {
     char temp = in.ReadChar();
     StringBuffer tempBuffer = new StringBuffer();
     tempBuffer.append( temp );
@@ -127,7 +127,7 @@ public class MyScanner {
     } // while
     
     return tempBuffer.toString();
-  } // findLine()
+  } // FindLine()
   
   public void GetInputFromStream() throws Throwable {
     ICEInputStream stdIn = new ICEInputStream();
@@ -137,7 +137,7 @@ public class MyScanner {
       while ( !stdIn.AtEOF() ) {
         
         mTokenStream.add( new AlineOfToken() );
-        StringProcessor stringProcessor = new StringProcessor( findLine( stdIn ) );
+        StringProcessor stringProcessor = new StringProcessor( FindLine( stdIn ) );
         while ( stringProcessor.HasToken() ) {
           mTokenStream.elementAt( mCurrentLine ).Add( new Token( stringProcessor.GetNextToken() ) );
         } // while
