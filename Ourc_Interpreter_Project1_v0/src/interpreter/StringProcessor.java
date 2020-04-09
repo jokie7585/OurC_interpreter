@@ -118,6 +118,10 @@ public class StringProcessor {
   } // Is_letter()
   
   private static void IdentMatcher( StringBuffer insBuffer, StringBuffer identMatchermatcherBuffer ) {
+    if ( Is_quit( insBuffer, identMatchermatcherBuffer ) ) {
+      return;
+    } // if
+    
     identMatchermatcherBuffer.append( insBuffer.charAt( 0 ) );
     insBuffer.deleteCharAt( 0 );
     while ( insBuffer.length() > 0 ) {
@@ -188,5 +192,31 @@ public class StringProcessor {
     
     return;
   } // DelimiterMatcher()
+  
+  private static boolean Is_quit( StringBuffer insBuffer, StringBuffer quitmatcherBuffer ) {
+    if ( insBuffer.charAt( 0 ) == 'q' ) {
+      quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
+      insBuffer.deleteCharAt( 0 );
+      if ( insBuffer.charAt( 0 ) == 'u' ) {
+        quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
+        insBuffer.deleteCharAt( 0 );
+        if ( insBuffer.charAt( 0 ) == 'i' ) {
+          quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
+          insBuffer.deleteCharAt( 0 );
+        } // if
+        if ( insBuffer.charAt( 0 ) == 't' ) {
+          quitmatcherBuffer.append( insBuffer.charAt( 0 ) );
+          insBuffer.deleteCharAt( 0 );
+          return true;
+        } // if
+      } // if
+    } // if
+    
+    // not quit
+    insBuffer = new StringBuffer( quitmatcherBuffer.append( insBuffer.toString() ).toString() );
+    quitmatcherBuffer = new StringBuffer();
+    
+    return false;
+  } // Is_quit()
   
 } // class StringProcessor

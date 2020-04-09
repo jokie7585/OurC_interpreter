@@ -23,7 +23,6 @@ public class Main {
     
     try {
       while ( myScanner.HasToken() ) {
-        
         try {
           Instruction instruction = myParser.GetNextInstruction();
           // instruction.PrintAll();
@@ -51,10 +50,6 @@ public class Main {
         
       } // while
     } // try
-    catch ( SegmenticErrorException e ) {
-      User_interface.PrintResult( e.ToString() );
-      
-    } // catch
     catch ( EndOfInputException e ) {
       User_interface.PrintResult( e.ToString() );
     } // catch
