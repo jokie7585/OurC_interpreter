@@ -48,6 +48,7 @@ class MyCPU {
   private static MyCPU sSingleton_MyCPU = new MyCPU();
   private Stack<Variable> mLocalVariables = new Stack<Variable>();
   private Vector<Command> mCommands = new Vector<Command>();
+  private boolean mMode = false;
   
   private MyCPU() {
     
@@ -87,12 +88,19 @@ class MyCPU {
       else if ( tempCommand.mCommnad_Type == Commnad_Type.sBOOLEANOPERATION ) {
         BooleanOperation( tempCommand );
       } // else if
+      else if ( tempCommand.mCommnad_Type == Commnad_Type.sSWITCHMODE ) {
+        Switch( tempCommand );
+      } // else if
       
       mCommands.remove( 0 );
     } // while
     
     User_interface.PrintResult( mLocalVariables.pop() );
   } // Run()
+  
+  private void Switch( Command command ) {
+    mMode = !mMode;
+  } // Switch()
   
   private void Assign( Command command ) throws Throwable {
     Variable tempVariable = mLocalVariables.pop();
@@ -157,6 +165,10 @@ class MyCPU {
     // type check
     if ( agentVariable.mDataType.mPriority < addentVariable.mDataType.mPriority ) {
       agentVariable.mDataType = addentVariable.mDataType;
+    } // if
+    
+    if ( mMode ) {
+      agentVariable.mDataType = DataType.sFLOAT;
     } // if
     
     if ( agentVariable.mDataType == DataType.sINT ) {
@@ -262,6 +274,7 @@ class MyCPU {
   public void InitCPU() {
     mLocalVariables = new Stack<Variable>();
     mCommands = new Vector<Command>();
+    mMode = false;
   } // InitCPU()
   
 } // class MyCPU

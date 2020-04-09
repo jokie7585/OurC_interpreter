@@ -218,11 +218,11 @@ public class MyParser {
     } // if
     else if ( mMyScanner.Peek_NextToken().Get().equals( "(" ) ) {
       // read in and abandon Left parenthesis
-      mMyScanner.Get_NextToken();
+      writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER );
       if ( ArithExp( writter ) ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( ")" ) ) {
           // read in and abandon Right parenthesis
-          mMyScanner.Get_NextToken();
+          writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER );
           return true;
         } // if
         else {
@@ -300,11 +300,13 @@ public class MyParser {
     } // else if
     else if ( mMyScanner.Peek_NextToken().Get().equals( "(" ) ) {
       // read in and abandon Left parenthesis
-      mMyScanner.Get_NextToken();
+      System.out.println( "in" );
+      writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER );
+      
       if ( ArithExp( writter ) ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( ")" ) ) {
           // read in and abandon Right parenthesis
-          mMyScanner.Get_NextToken();
+          writter.Write( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER );
           return true;
         } // if
         else {
