@@ -199,7 +199,7 @@ public class StringProcessor {
     
     if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'q' ) {
       tempMatcher.append( tempIns.charAt( 0 ) );
-      insBuffer.deleteCharAt( 0 );
+      tempIns.deleteCharAt( 0 );
       
       if ( tempIns.length() > 0 && tempIns.charAt( 0 ) == 'u' ) {
         tempMatcher.append( tempIns.charAt( 0 ) );
