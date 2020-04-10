@@ -32,11 +32,11 @@ class Command {
       mSymbolOfOperand = symbol;
     } // else if
     else if ( operand.equals( "(" ) ) {
-      mCommnad_Type = Commnad_Type.sSWITCHMODE;
+      mCommnad_Type = Commnad_Type.sSWITCHMODEADD;
       mSymbolOfOperand = symbol;
     } // else if
     else if ( operand.equals( ")" ) ) {
-      mCommnad_Type = Commnad_Type.sSWITCHMODE;
+      mCommnad_Type = Commnad_Type.sSWITCHMODESUB;
       mSymbolOfOperand = symbol;
     } // else if
     else if ( operand.equals( "*" ) ) {
@@ -88,7 +88,8 @@ class Commnad_Type {
   public static final Commnad_Type sDIV = new Commnad_Type( "div" );
   public static final Commnad_Type sASSIGN = new Commnad_Type( "assigh" );
   public static final Commnad_Type sBOOLEANOPERATION = new Commnad_Type( "booleanOperation" );
-  public static final Commnad_Type sSWITCHMODE = new Commnad_Type( "switchMode" );
+  public static final Commnad_Type sSWITCHMODEADD = new Commnad_Type( "switchModeADD" );
+  public static final Commnad_Type sSWITCHMODESUB = new Commnad_Type( "switchModeSUB" );
   
   public String ToString() {
     return mTypeString;

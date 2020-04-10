@@ -1,6 +1,6 @@
 package interpreter;
 
-class MyParser {
+public class MyParser {
   private static MyParser sSingleTone_MyParser = new MyParser();
   private MyScanner mMyScanner;
   private MyRuntime mMyRuntime;
@@ -84,7 +84,7 @@ class MyParser {
       throw new SyntxErrorException( mMyScanner.Get_NextToken() );
     } // else
     
-  } // Command()
+  } // RunNextInstruction()
   
   private boolean IDlessArithExpOrBexp() throws Throwable {
     while ( mMyScanner.Peek_NextToken().Get().equals( "+" ) || mMyScanner.Peek_NextToken().Get().equals( "-" )
@@ -225,12 +225,13 @@ class MyParser {
     else if ( mMyScanner.Peek_NextToken().Get().equals( "(" ) ) {
       
       // read in and abandon Left parenthesis
-      mMyScanner.Get_NextToken();
+      mMyRuntime.RunACommand( new Command( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER ) );
+      
       if ( ArithExp() ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( ")" ) ) {
           
           // read in and abandon Right parenthesis
-          mMyScanner.Get_NextToken();
+          mMyRuntime.RunACommand( new Command( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER ) );
           return true;
         } // if
         else {
@@ -313,12 +314,13 @@ class MyParser {
     } // else if
     else if ( mMyScanner.Peek_NextToken().Get().equals( "(" ) ) {
       // read in and abandon Left parenthesis
-      mMyScanner.Get_NextToken();
+      
+      mMyRuntime.RunACommand( new Command( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER ) );
       
       if ( ArithExp() ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( ")" ) ) {
           // read in and abandon Right parenthesis
-          mMyScanner.Get_NextToken();
+          mMyRuntime.RunACommand( new Command( mMyScanner.Get_NextToken(), Terminal_symbol.sDELIMITER ) );
           
           return true;
         } // if

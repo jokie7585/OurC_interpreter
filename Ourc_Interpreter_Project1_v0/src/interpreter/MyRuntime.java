@@ -57,7 +57,7 @@ class MyCPU {
   private static MyCPU sSingleton_MyCPU = new MyCPU();
   private Stack<Variable> mLocalVariables = new Stack<Variable>();
   private Vector<Command> mCommands = new Vector<Command>();
-  private boolean mMode = false;
+  private int mMode = 0;
   
   private MyCPU() {
     
@@ -82,6 +82,7 @@ class MyCPU {
   public void Run() throws Throwable {
     while ( !mCommands.isEmpty() ) {
       Command tempCommand = mCommands.elementAt( 0 );
+      
       if ( tempCommand.mCommnad_Type == Commnad_Type.sADD ) {
         Add( tempCommand );
       } // if
@@ -103,9 +104,12 @@ class MyCPU {
       else if ( tempCommand.mCommnad_Type == Commnad_Type.sBOOLEANOPERATION ) {
         BooleanOperation( tempCommand );
       } // else if
-      // else if ( tempCommand.mCommnad_Type == Commnad_Type.sSWITCHMODE ) {
-      // Switch( tempCommand );
-      // } // else if
+      else if ( tempCommand.mCommnad_Type == Commnad_Type.sSWITCHMODEADD ) {
+        SwitchADD( tempCommand );
+      } // else if
+      else if ( tempCommand.mCommnad_Type == Commnad_Type.sSWITCHMODESUB ) {
+        SwitchSUB( tempCommand );
+      } // else if
       
       mCommands.remove( 0 );
     } // while
@@ -116,9 +120,16 @@ class MyCPU {
     User_interface.PrintResult( mLocalVariables.pop() );
   } // PrintTopOfStack()
   
-  private void Switch( Command command ) {
-    mMode = !mMode;
-  } // Switch()
+  private void SwitchADD( Command command ) {
+    
+    mMode = mMode + 1;
+    
+  } // SwitchADD()
+  
+  private void SwitchSUB( Command command ) {
+    mMode = mMode - 1;
+    
+  } // SwitchSUB()
   
   private void Assign( Command command ) throws Throwable {
     Variable tempVariable = mLocalVariables.pop();
@@ -188,11 +199,11 @@ class MyCPU {
     // if ( mMode ) {
     // agentVariable.mDataType = DataType.sFLOAT;
     // } // if
-    //
-    // if ( agentVariable.mDataType == DataType.sINT ) {
-    // String tempString = "" + agentVariable.mValue.intValue();
-    // agentVariable.mValue = Double.parseDouble( tempString );
-    // } // if
+    
+    if ( agentVariable.mDataType == DataType.sINT && mMode == 0 ) {
+      String tempString = "" + agentVariable.mValue.intValue();
+      agentVariable.mValue = Double.parseDouble( tempString );
+    } // if
     
     // 存回stack
     mLocalVariables.push( agentVariable );
@@ -292,7 +303,7 @@ class MyCPU {
   public void InitCPU() {
     mLocalVariables = new Stack<Variable>();
     mCommands = new Vector<Command>();
-    mMode = false;
+    mMode = 0;
   } // InitCPU()
   
 } // class MyCPU
