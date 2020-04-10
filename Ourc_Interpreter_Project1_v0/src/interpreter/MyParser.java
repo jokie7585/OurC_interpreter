@@ -102,7 +102,7 @@ public class MyParser {
         } // if
       } // if
       else {
-        if ( Factor( writter ) ) {
+        if ( Factor( writter, operatorString ) ) {
           writter.Write( operatorString, Terminal_symbol.sDELIMITER );
         } // if
       } // else
@@ -184,7 +184,7 @@ public class MyParser {
           || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
         // match { '*' Factor | '/' Factor }
         String operatorString = mMyScanner.Get_NextToken();
-        if ( Factor( writter ) ) {
+        if ( Factor( writter, operatorString ) ) {
           writter.Write( operatorString, Terminal_symbol.sDELIMITER );
         } // if
         
@@ -254,12 +254,12 @@ public class MyParser {
   } // ArithExp()
   
   private boolean Term( CommandWritter writter ) throws Throwable {
-    if ( Factor( writter ) ) {
+    if ( Factor( writter, "" ) ) {
       while ( mMyScanner.Peek_NextToken().Get().equals( "*" )
           || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
         // match { '*' Factor | '/' Factor }
         String operatorString = mMyScanner.Get_NextToken();
-        if ( Factor( writter ) ) {
+        if ( Factor( writter, operatorString ) ) {
           writter.Write( operatorString, Terminal_symbol.sDELIMITER );
         } // if
         
@@ -271,7 +271,7 @@ public class MyParser {
     return false;
   } // Term()
   
-  private boolean Factor( CommandWritter writter ) throws Throwable {
+  private boolean Factor( CommandWritter writter, String operatoerString ) throws Throwable {
     if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sIDENT ) {
       if ( !Register.sRegister.Is_Defined( mMyScanner.Peek_NextToken().Get() ) ) {
         throw new SegmenticErrorException( mMyScanner.Peek_NextToken().Get() );
@@ -289,6 +289,13 @@ public class MyParser {
       
       if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sNUM ) {
         operandString = operandString + mMyScanner.Get_NextToken();
+        
+        if ( operatoerString.equals( "/" ) ) {
+          if ( Float.parseFloat( operandString ) == 0 ) {
+            throw new SegmenticErrorException();
+          } // if
+        } // if
+        
         // push NUM
         writter.Write( operandString, Terminal_symbol.sNUM );
       } // if
