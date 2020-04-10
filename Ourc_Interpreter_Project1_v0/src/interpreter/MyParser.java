@@ -1,6 +1,6 @@
 package interpreter;
 
-public class MyParser {
+class MyParser {
   private static MyParser sSingleTone_MyParser = new MyParser();
   private MyScanner mMyScanner;
   private MyRuntime mMyRuntime;
@@ -15,12 +15,8 @@ public class MyParser {
   } // GetMyParser()
   
   // parser get a instruction from tokenStream(MyScanner)
-  public void RunNextInstruction() throws Throwable {
-    CommandWritter writter = new CommandWritter();
-    Command( writter );
-  } // GetNextInstruction()
   
-  private void Command( CommandWritter writter ) throws Throwable {
+  public void RunNextInstruction() throws Throwable {
     
     // writter is no longer write command
     
@@ -36,7 +32,7 @@ public class MyParser {
       if ( mMyScanner.Peek_NextToken().Get().equals( ":=" ) ) {
         String operatorString = mMyScanner.Get_NextToken();
         
-        if ( ArithExp( writter ) ) {
+        if ( ArithExp() ) {
           if ( mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
             mMyScanner.Get_NextToken();
             mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
@@ -55,7 +51,7 @@ public class MyParser {
       } // if
       else {
         if ( Register.sRegister.Is_Defined( tempString ) ) {
-          IDlessArithExpOrBexp( writter );
+          IDlessArithExpOrBexp();
           if ( mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
             mMyScanner.Get_NextToken();
             mMyRuntime.PrintTopOfStack();
@@ -72,7 +68,7 @@ public class MyParser {
       } // else
       
     } // if
-    else if ( NOT_ID_StartArithExpOrBexp( writter ) ) {
+    else if ( NOT_ID_StartArithExpOrBexp() ) {
       
       if ( mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
         mMyScanner.Get_NextToken();
@@ -90,7 +86,7 @@ public class MyParser {
     
   } // Command()
   
-  private boolean IDlessArithExpOrBexp( CommandWritter writter ) throws Throwable {
+  private boolean IDlessArithExpOrBexp() throws Throwable {
     while ( mMyScanner.Peek_NextToken().Get().equals( "+" ) || mMyScanner.Peek_NextToken().Get().equals( "-" )
         || mMyScanner.Peek_NextToken().Get().equals( "*" )
         || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
@@ -98,13 +94,13 @@ public class MyParser {
       String operatorString = mMyScanner.Get_NextToken();
       if ( mMyScanner.Peek_NextToken().Get().equals( "+" )
           || mMyScanner.Peek_NextToken().Get().equals( "-" ) ) {
-        if ( Term( writter ) ) {
+        if ( Term() ) {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
       } // if
       else {
-        if ( Factor( writter ) ) {
+        if ( Factor() ) {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
@@ -114,7 +110,7 @@ public class MyParser {
     StringBuffer booleanOperator = new StringBuffer();
     // match [<BooleanOperator> <ArithExp>]
     if ( BooleanOperator( booleanOperator ) ) {
-      if ( ArithExp( writter ) ) {
+      if ( ArithExp() ) {
         mMyRuntime.RunACommand( new Command( booleanOperator.toString(), Terminal_symbol.sDELIMITER ) );
         
       } // if
@@ -127,13 +123,13 @@ public class MyParser {
     return true;
   } // IDlessArithExpOrBexp()
   
-  private boolean NOT_ID_StartArithExpOrBexp( CommandWritter writter ) throws Throwable {
-    if ( NOT_ID_StartArithExp( writter ) ) {
+  private boolean NOT_ID_StartArithExpOrBexp() throws Throwable {
+    if ( NOT_ID_StartArithExp() ) {
       
       StringBuffer booleanOperator = new StringBuffer();
       // match [<BooleanOperator> <ArithExp>]
       if ( BooleanOperator( booleanOperator ) ) {
-        if ( ArithExp( writter ) ) {
+        if ( ArithExp() ) {
           mMyRuntime.RunACommand( new Command( booleanOperator.toString(), Terminal_symbol.sDELIMITER ) );
           // below is abandon
           
@@ -163,16 +159,16 @@ public class MyParser {
     return false;
   } // BooleanOperator()
   
-  private boolean NOT_ID_StartArithExp( CommandWritter writter ) throws Throwable {
+  private boolean NOT_ID_StartArithExp() throws Throwable {
     
-    if ( NOT_ID_StartTerm( writter ) ) {
+    if ( NOT_ID_StartTerm() ) {
       
       // match {'+'<Term> | '-'<Term>}
       while ( mMyScanner.Peek_NextToken().Get().equals( "+" )
           || mMyScanner.Peek_NextToken().Get().equals( "-" ) ) {
         // <Term>
         String operatorString = mMyScanner.Get_NextToken();
-        if ( Term( writter ) ) {
+        if ( Term() ) {
           
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
         } // if
@@ -186,13 +182,13 @@ public class MyParser {
     
   } // NOT_ID_StartArithExp()
   
-  private boolean NOT_ID_StartTerm( CommandWritter writter ) throws Throwable {
-    if ( NOT_ID_StartFactor( writter ) ) {
+  private boolean NOT_ID_StartTerm() throws Throwable {
+    if ( NOT_ID_StartFactor() ) {
       while ( mMyScanner.Peek_NextToken().Get().equals( "*" )
           || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
         // match { '*' Factor | '/' Factor }
         String operatorString = mMyScanner.Get_NextToken();
-        if ( Factor( writter ) ) {
+        if ( Factor() ) {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
@@ -206,7 +202,7 @@ public class MyParser {
     
   } // NOT_ID_StartTerm()
   
-  private boolean NOT_ID_StartFactor( CommandWritter writter ) throws Throwable {
+  private boolean NOT_ID_StartFactor() throws Throwable {
     if ( Sign() || mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sNUM ) {
       // match [sign]<NUM>
       String operandString = "";
@@ -230,7 +226,7 @@ public class MyParser {
       
       // read in and abandon Left parenthesis
       mMyScanner.Get_NextToken();
-      if ( ArithExp( writter ) ) {
+      if ( ArithExp() ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( ")" ) ) {
           
           // read in and abandon Right parenthesis
@@ -247,13 +243,13 @@ public class MyParser {
     return false;
   } // NOT_ID_StartFactor()
   
-  private boolean ArithExp( CommandWritter writter ) throws Throwable {
-    if ( Term( writter ) ) {
+  private boolean ArithExp() throws Throwable {
+    if ( Term() ) {
       while ( mMyScanner.Peek_NextToken().Get().equals( "+" )
           || mMyScanner.Peek_NextToken().Get().equals( "-" ) ) {
         // match { '+' Term | '-' Term }
         String operatorString = mMyScanner.Get_NextToken();
-        if ( Term( writter ) ) {
+        if ( Term() ) {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
@@ -266,13 +262,13 @@ public class MyParser {
     return false;
   } // ArithExp()
   
-  private boolean Term( CommandWritter writter ) throws Throwable {
-    if ( Factor( writter ) ) {
+  private boolean Term() throws Throwable {
+    if ( Factor() ) {
       while ( mMyScanner.Peek_NextToken().Get().equals( "*" )
           || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
         // match { '*' Factor | '/' Factor }
         String operatorString = mMyScanner.Get_NextToken();
-        if ( Factor( writter ) ) {
+        if ( Factor() ) {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
@@ -285,7 +281,7 @@ public class MyParser {
     return false;
   } // Term()
   
-  private boolean Factor( CommandWritter writter ) throws Throwable {
+  private boolean Factor() throws Throwable {
     if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sIDENT ) {
       if ( !Register.sRegister.Is_Defined( mMyScanner.Peek_NextToken().Get() ) ) {
         throw new SegmenticErrorException( mMyScanner.Peek_NextToken().Get() );
@@ -319,7 +315,7 @@ public class MyParser {
       // read in and abandon Left parenthesis
       mMyScanner.Get_NextToken();
       
-      if ( ArithExp( writter ) ) {
+      if ( ArithExp() ) {
         if ( mMyScanner.Peek_NextToken().Get().equals( ")" ) ) {
           // read in and abandon Right parenthesis
           mMyScanner.Get_NextToken();
