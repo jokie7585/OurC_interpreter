@@ -36,7 +36,19 @@ public class MyParser {
         String operatorString = mMyScanner.Get_NextToken();
         
         if ( ArithExp( writter ) ) {
-          mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
+          if ( mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
+            mMyScanner.Get_NextToken();
+            mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
+            mMyRuntime.PrintTopOfStack();
+            // below is abandon, not useful
+            Computing computingIns = new Computing();
+            computingIns.AddFromCommandWriter( writter );
+            return computingIns;
+          } // if
+          else {
+            throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+          } // else
+          
         } // if
         else {
           throw new SyntxErrorException( mMyScanner.Get_NextToken() );
