@@ -60,6 +60,7 @@ public class MyParser {
           || mMyScanner.Peek_NextToken().Get().equals( "*" )
           || mMyScanner.Peek_NextToken().Get().equals( "/" )
           || mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
+        
         if ( Register.sRegister.Is_Defined( tempString ) ) {
           IDlessArithExpOrBexp();
           if ( mMyScanner.Peek_NextToken().Get().equals( ";" ) ) {
@@ -253,6 +254,9 @@ public class MyParser {
       } // if
       
     } // else if
+    else {
+      throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+    } // else
     
     return false;
   } // NOT_ID_StartFactor()

@@ -111,7 +111,7 @@ public class Token {
   } // Is_NUM()
   
   private boolean Is_letter( char character ) throws LexicalErrorException {
-    if ( ( character >= 65 && character <= 90 ) || ( character >= 97 && character <= 122 ) ) {
+    if ( ( character >= 'a' && character <= 'z' ) || ( character >= 'A' && character <= 'Z' ) ) {
       return true;
     } // if
     
@@ -119,7 +119,7 @@ public class Token {
   } // Is_letter()
   
   private boolean Is_digit( char character ) throws LexicalErrorException {
-    if ( character >= 48 && character <= 57 ) {
+    if ( character >= '0' && character <= '9' ) {
       return true;
     } // if
     
