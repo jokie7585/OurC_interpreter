@@ -30,6 +30,15 @@ public class MyRuntime {
     mMyCPU.Run();
   } // Run()
   
+  public void RunACommand( Command command ) throws Throwable {
+    mMyCPU.LoadCommand( command );
+    mMyCPU.Run();
+  } // RunACommand()
+  
+  public void PrintTopOfStack() throws Throwable {
+    mMyCPU.PrintTopOfStack();
+  } // PrintTopOfStack()
+  
   // append Command into callStack
   public void Push( Vector<Command> commands ) {
     mMyCPU.LoadCommand( commands );
@@ -64,6 +73,12 @@ class MyCPU {
     } // for
   } // LoadCommand()
   
+  public void LoadCommand( Command commands ) {
+    
+    mCommands.add( commands );
+    
+  } // LoadCommand()
+  
   public void Run() throws Throwable {
     while ( !mCommands.isEmpty() ) {
       Command tempCommand = mCommands.elementAt( 0 );
@@ -95,8 +110,11 @@ class MyCPU {
       mCommands.remove( 0 );
     } // while
     
-    User_interface.PrintResult( mLocalVariables.pop() );
   } // Run()
+  
+  public void PrintTopOfStack() throws Throwable {
+    User_interface.PrintResult( mLocalVariables.pop() );
+  } // PrintTopOfStack()
   
   private void Switch( Command command ) {
     mMode = !mMode;
@@ -204,65 +222,65 @@ class MyCPU {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001
           && leftVariable.GetVlue() - rightVariable.GetVlue() >= -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = 1.0f;
+        leftVariable.mValue = 1.0;
       } // if
       else {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = -1.0f;
+        leftVariable.mValue = -1.0;
       } // else
     } // if
     else if ( command.mOperand.equals( "<>" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() > 0.0001
           || leftVariable.GetVlue() - rightVariable.GetVlue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = 1.0f;
+        leftVariable.mValue = 1.0;
       } // if
       else {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = -1.0f;
+        leftVariable.mValue = -1.0;
       } // else
       
     } // else if
     else if ( command.mOperand.equals( ">" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() > 0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = 1.0f;
+        leftVariable.mValue = 1.0;
       } // if
       else {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = -1.0f;
+        leftVariable.mValue = -1.0;
       } // else
       
     } // else if
     else if ( command.mOperand.equals( "<" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = 1.0f;
+        leftVariable.mValue = 1.0;
       } // if
       else {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = -1.0f;
+        leftVariable.mValue = -1.0;
       } // else
       
     } // else if
     else if ( command.mOperand.equals( ">=" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() >= -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = 1.0f;
+        leftVariable.mValue = 1.0;
       } // if
       else {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = -1.0f;
+        leftVariable.mValue = -1.0;
       } // else
     } // else if
     else if ( command.mOperand.equals( "<=" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = 1.0f;
+        leftVariable.mValue = 1.0;
       } // if
       else {
         leftVariable.mDataType = DataType.sBOOLEAN;
-        leftVariable.mValue = -1.0f;
+        leftVariable.mValue = -1.0;
       } // else
     } // else if
     
@@ -330,7 +348,7 @@ class Register {
 // 此class由於設計問題 一定要GetVlaue()後才會設定mSymbol
 class Variable {
   String mLiteralString;
-  Float mValue;
+  Double mValue;
   Terminal_symbol mSymbol;
   DataType mDataType;
   
@@ -353,15 +371,15 @@ class Variable {
   } // TypeCheck()
   
   // 變數定值並設定型別, 若已定值則當作暫存的已運算過變數
-  public float GetVlue() throws Throwable {
+  public Double GetVlue() throws Throwable {
     if ( mSymbol == Terminal_symbol.sNUM ) {
       if ( mValue == null ) {
         TypeCheck();
-        mValue = Float.parseFloat( mLiteralString );
-        return mValue.floatValue();
+        mValue = Double.parseDouble( mLiteralString );
+        return mValue;
       } // if
       else {
-        return mValue.floatValue();
+        return mValue;
       } // else
     } // if
     else if ( mSymbol == Terminal_symbol.sIDENT ) {

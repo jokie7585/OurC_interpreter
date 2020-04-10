@@ -24,10 +24,12 @@ public class Main {
     try {
       while ( myScanner.HasToken() ) {
         try {
-          Instruction instruction = myParser.GetNextInstruction();
+          
+          // GetNextInstruction() now is run by parsing
+          myParser.GetNextInstruction();
           // instruction.PrintAll();
           // System.out.println( "start computing" );
-          command_Runner.Run( instruction );
+          // command_Runner.Run( instruction );
           // System.out.println( "finish computing" );
           
         } // try
