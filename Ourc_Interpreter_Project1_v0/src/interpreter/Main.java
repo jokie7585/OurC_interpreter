@@ -26,7 +26,7 @@ public class Main {
         try {
           
           // GetNextInstruction() now is run by parsing
-          myParser.GetNextInstruction();
+          myParser.RunNextInstruction();
           // instruction.PrintAll();
           // System.out.println( "start computing" );
           // command_Runner.Run( instruction );
