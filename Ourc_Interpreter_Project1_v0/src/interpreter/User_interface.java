@@ -33,9 +33,9 @@ public class User_interface {
         System.out.println( "> " + var.mValue.intValue() );
       } // if
       else {
-        String tempString = String.format( "%.3f", var.mValue );
+        String tempString = String.format( "%.3f", var.mValue.floatValue() );
         
-        if ( var.mValue == 0 && tempString.charAt( 0 ) == '-' ) {
+        if ( var.mValue.floatValue() == 0 && tempString.charAt( 0 ) == '-' ) {
           tempString = tempString.substring( 1 );
         } // if
         

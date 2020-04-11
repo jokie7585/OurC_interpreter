@@ -25,7 +25,7 @@ public class StringProcessor {
     
     StringBuffer tokenBuffer = new StringBuffer();
     
-    while ( mInsBuffer.length() > 0 ) {
+    if ( mInsBuffer.length() > 0 ) {
       SkipWhiteSpace();
       if ( Is_digit( mInsBuffer.charAt( 0 ) ) || mInsBuffer.charAt( 0 ) == '.' ) {
         NumMatcher( mInsBuffer, tokenBuffer );
@@ -39,7 +39,7 @@ public class StringProcessor {
       } // else
       
       return tokenBuffer.toString();
-    } // while
+    } // if
     
     throw new EndOfInputException();
   } // GetNextToken()
@@ -102,7 +102,7 @@ public class StringProcessor {
   } // Is_Num()
   
   public static boolean Is_digit( char character ) {
-    if ( character >= 48 && character <= 57 ) {
+    if ( character >= '0' && character <= '9' ) {
       return true;
     } // if
     
@@ -110,7 +110,7 @@ public class StringProcessor {
   } // Is_digit()
   
   private static boolean Is_letter( char character ) {
-    if ( ( character >= 65 && character <= 90 ) || ( character >= 97 && character <= 122 ) ) {
+    if ( ( character >= 'a' && character <= 'z' ) || ( character >= 'A' && character <= 'Z' ) ) {
       return true;
     } // if
     
