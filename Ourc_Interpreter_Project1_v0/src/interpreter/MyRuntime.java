@@ -231,7 +231,7 @@ class MyCPU {
     
     if ( command.mOperand.equals( "=" ) ) {
       if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() <= 0.0001
-          || leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() >= -0.0001 ) {
+          && leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() >= -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
