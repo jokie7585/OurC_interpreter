@@ -231,6 +231,12 @@ class MyCPU {
     Variable rightVariable = mLocalVariables.pop();
     Variable leftVariable = mLocalVariables.pop();
     
+    // System.out.println( "in" );
+    // System.out.println( leftVariable.GetVlue().floatValue() );
+    // System.out.println( rightVariable.GetVlue().floatValue() );
+    // System.out.println( leftVariable.GetVlue().floatValue() -
+    // rightVariable.GetVlue().floatValue() );
+    
     if ( command.mOperand.equals( "=" ) ) {
       if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() <= 0.0001
           && leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() >= -0.0001 ) {
@@ -243,11 +249,6 @@ class MyCPU {
       } // else
     } // if
     else if ( command.mOperand.equals( "<>" ) ) {
-      // System.out.println( "in" );
-      // System.out.println( leftVariable.GetVlue().floatValue() );
-      // System.out.println( rightVariable.GetVlue().floatValue() );
-      // System.out.println( leftVariable.GetVlue().floatValue() -
-      // rightVariable.GetVlue().floatValue() );
       if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() > 0.0001
           || leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
