@@ -83,6 +83,8 @@ class MyCPU {
     while ( !mCommands.isEmpty() ) {
       Command tempCommand = mCommands.elementAt( 0 );
       
+      // System.out.println( tempCommand.TO_String() );
+      
       if ( tempCommand.mCommnad_Type == Commnad_Type.sADD ) {
         Add( tempCommand );
       } // if
@@ -241,6 +243,11 @@ class MyCPU {
       } // else
     } // if
     else if ( command.mOperand.equals( "<>" ) ) {
+      // System.out.println( "in" );
+      // System.out.println( leftVariable.GetVlue().floatValue() );
+      // System.out.println( rightVariable.GetVlue().floatValue() );
+      // System.out.println( leftVariable.GetVlue().floatValue() -
+      // rightVariable.GetVlue().floatValue() );
       if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() > 0.0001
           || leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;

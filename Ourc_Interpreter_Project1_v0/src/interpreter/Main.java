@@ -4,25 +4,28 @@ public class Main {
   public static int suTestNum;
   
   public static void main( String[] args ) throws Throwable {
+    New_MyScanner stdin = New_MyScanner.GetMyScanner();
+    // int[] intarray = { 1, 2, 3, 4 };
+    // System.out.println( intarray.getClass() );
     // 讀入uTestNum
     // User_interface.InitPAL();
     // 測試testNum
     // System.out.println( "uTestNum is :" + uTestNum );
     // 初始化tokenStream
-    MyScanner myScanner = MyScanner.GetMyScanner();
+    // MyScanner myScanner = MyScanner.GetMyScanner();
     // 初始化parser
     MyParser myParser = MyParser.GetMyParser();
     // 初始化 runtime
     Command_Runner command_Runner = Command_Runner.GetCommand_Runner();
     // 讀入使用者輸入
-    myScanner.GetInputFromStream();
+    // myScanner.GetInputFromStream();
     // 印出所有token Stream
     // myScanner.PrintAll();
     
     User_interface.Generate_ProgramStart();
     
     try {
-      while ( myScanner.HasToken() ) {
+      while ( stdin.HasToken() ) {
         try {
           
           // GetNextInstruction() now is run by parsing
@@ -35,22 +38,24 @@ public class Main {
         } // try
         catch ( LexicalErrorException e ) {
           User_interface.PrintResult( e.ToString() );
-          myScanner.SkipLine();
+          stdin.ErrorInite();
           command_Runner.Init();
           
         } // catch
         catch ( SyntxErrorException e ) {
           User_interface.PrintResult( e.ToString() );
-          myScanner.SkipLine();
+          stdin.ErrorInite();
           command_Runner.Init();
         } // catch
         catch ( SegmenticErrorException e ) {
           User_interface.PrintResult( e.ToString() );
-          myScanner.SkipLine();
+          stdin.ErrorInite();
           command_Runner.Init();
         } // catch
         
       } // while
+      
+      System.out.println( "> Program exits..." );
     } // try
     catch ( EndOfInputException e ) {
       User_interface.PrintResult( e.ToString() );
