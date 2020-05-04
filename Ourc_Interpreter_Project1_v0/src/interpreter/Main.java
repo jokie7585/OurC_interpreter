@@ -4,7 +4,7 @@ public class Main {
   public static int suTestNum;
   
   public static void main( String[] args ) throws Throwable {
-    New_MyScanner stdin = New_MyScanner.GetMyScanner();
+    MyScanner stdin = MyScanner.GetMyScanner();
     // int[] intarray = { 1, 2, 3, 4 };
     // System.out.println( intarray.getClass() );
     // 讀入uTestNum

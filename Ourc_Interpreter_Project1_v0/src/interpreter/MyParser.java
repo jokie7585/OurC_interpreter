@@ -2,11 +2,11 @@ package interpreter;
 
 public class MyParser {
   private static MyParser sSingleTone_MyParser;
-  private New_MyScanner mNew_MyScanner;
+  private MyScanner mNew_MyScanner;
   private MyRuntime mMyRuntime;
   
   private MyParser() throws Throwable {
-    mNew_MyScanner = New_MyScanner.GetMyScanner();
+    mNew_MyScanner = MyScanner.GetMyScanner();
     mMyRuntime = MyRuntime.GetMyRuntime();
   } // MyParser()
   
