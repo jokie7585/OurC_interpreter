@@ -4,6 +4,14 @@ public class Main {
   public static int suTestNum;
   
   public static void main( String[] args ) throws Throwable {
+    // Double iDouble = new Double( "5.000278787878" );
+    // Double i2Double = new Double( "5.000178787878" );
+    // Double mValueDouble = iDouble - i2Double;
+    // System.out.println( iDouble.floatValue() - i2Double.floatValue() );
+    // System.out.println( mValueDouble.floatValue() );
+    
+    User_interface.Generate_ProgramStart();
+    
     MyScanner stdin = MyScanner.GetMyScanner();
     // int[] intarray = { 1, 2, 3, 4 };
     // System.out.println( intarray.getClass() );
@@ -21,8 +29,6 @@ public class Main {
     // myScanner.GetInputFromStream();
     // 印出所有token Stream
     // myScanner.PrintAll();
-    
-    User_interface.Generate_ProgramStart();
     
     try {
       while ( stdin.HasToken() ) {
