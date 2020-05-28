@@ -9,7 +9,6 @@ public class Main {
     // Double mValueDouble = iDouble - i2Double;
     // System.out.println( iDouble.floatValue() - i2Double.floatValue() );
     // System.out.println( mValueDouble.floatValue() );
-    
     User_interface.Generate_ProgramStart();
     
     MyScanner stdin = MyScanner.GetMyScanner();

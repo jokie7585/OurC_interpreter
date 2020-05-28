@@ -58,7 +58,7 @@ public class Token {
           i++;
         } // if
         else {
-          throw new LexicalErrorException( mToken.charAt( i ) );
+          throw new LexicalErrorException( mToken.charAt( 0 ) );
         } // else
       } // while
     } // if
@@ -83,7 +83,7 @@ public class Token {
             i++;
           } // else if
           else {
-            throw new LexicalErrorException( mToken.charAt( i ) );
+            throw new LexicalErrorException( mToken.charAt( 0 ) );
           } // else
         } // if
         else {
@@ -93,7 +93,7 @@ public class Token {
             i++;
           } // if
           else {
-            throw new LexicalErrorException( mToken.charAt( i ) );
+            throw new LexicalErrorException( mToken.charAt( 0 ) );
           } // else
         } // else
       } // while

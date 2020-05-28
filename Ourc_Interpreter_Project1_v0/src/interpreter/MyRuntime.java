@@ -232,14 +232,13 @@ class MyCPU {
     Variable leftVariable = mLocalVariables.pop();
     
     // System.out.println( "in" );
-    // System.out.println( leftVariable.GetVlue().floatValue() );
-    // System.out.println( rightVariable.GetVlue().floatValue() );
-    // System.out.println( leftVariable.GetVlue().floatValue() -
-    // rightVariable.GetVlue().floatValue() );
+    System.out.println( leftVariable.GetVlue() );
+    System.out.println( rightVariable.GetVlue() );
+    System.out.println( leftVariable.GetVlue() - rightVariable.GetVlue() );
     
     if ( command.mOperand.equals( "=" ) ) {
-      if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() <= 0.0001
-          && leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() >= -0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001
+          && leftVariable.GetVlue() - rightVariable.GetVlue() >= -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
@@ -249,8 +248,8 @@ class MyCPU {
       } // else
     } // if
     else if ( command.mOperand.equals( "<>" ) ) {
-      if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() > 0.0001
-          || leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() < -0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() > 0.0001
+          || leftVariable.GetVlue() - rightVariable.GetVlue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
@@ -261,7 +260,7 @@ class MyCPU {
       
     } // else if
     else if ( command.mOperand.equals( ">" ) ) {
-      if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() > 0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() > 0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
@@ -272,7 +271,7 @@ class MyCPU {
       
     } // else if
     else if ( command.mOperand.equals( "<" ) ) {
-      if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() < -0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() < -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
@@ -283,7 +282,7 @@ class MyCPU {
       
     } // else if
     else if ( command.mOperand.equals( ">=" ) ) {
-      if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() >= -0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() >= -0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if
@@ -293,7 +292,7 @@ class MyCPU {
       } // else
     } // else if
     else if ( command.mOperand.equals( "<=" ) ) {
-      if ( leftVariable.GetVlue().floatValue() - rightVariable.GetVlue().floatValue() <= 0.0001 ) {
+      if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001 ) {
         leftVariable.mDataType = DataType.sBOOLEAN;
         leftVariable.mValue = 1.0;
       } // if

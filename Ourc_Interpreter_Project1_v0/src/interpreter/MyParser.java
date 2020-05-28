@@ -105,8 +105,7 @@ public class MyParser {
   } // RunNextInstruction()
   
   private boolean IDlessArithExpOrBexp() throws Throwable {
-    while ( mMyScanner.Peek_NextToken().Get().equals( "+" )
-        || mMyScanner.Peek_NextToken().Get().equals( "-" )
+    while ( mMyScanner.Peek_NextToken().Get().equals( "+" ) || mMyScanner.Peek_NextToken().Get().equals( "-" )
         || mMyScanner.Peek_NextToken().Get().equals( "*" )
         || mMyScanner.Peek_NextToken().Get().equals( "/" ) ) {
       
@@ -165,8 +164,7 @@ public class MyParser {
   } // NOT_ID_StartArithExpOrBexp()
   
   private boolean BooleanOperator( StringBuffer booleanOperator ) throws Throwable {
-    if ( mMyScanner.Peek_NextToken().Get().equals( "=" )
-        || mMyScanner.Peek_NextToken().Get().equals( ">" )
+    if ( mMyScanner.Peek_NextToken().Get().equals( "=" ) || mMyScanner.Peek_NextToken().Get().equals( ">" )
         || mMyScanner.Peek_NextToken().Get().equals( ">=" )
         || mMyScanner.Peek_NextToken().Get().equals( "<>" )
         || mMyScanner.Peek_NextToken().Get().equals( "<=" )

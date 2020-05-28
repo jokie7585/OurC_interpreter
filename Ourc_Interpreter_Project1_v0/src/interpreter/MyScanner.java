@@ -9,13 +9,13 @@ public class MyScanner {
   private ICEInputStream mStdIn;
   private Vector<Token> mStream = new Vector<Token>();
   private int mCounter;
-  private boolean is_EndOfFile;
+  private boolean mIs_EndOfFile;
   
   private MyScanner() throws Throwable {
     mStdIn = new ICEInputStream();
     mStream = new Vector<Token>();
     mCounter = 0;
-    is_EndOfFile = false;
+    mIs_EndOfFile = false;
     InitPAL();
     
   } // MyScanner()
@@ -26,8 +26,10 @@ public class MyScanner {
     } // if
     else {
       while ( mCounter >= mStream.size() ) {
+        
         GetInputFromeStream();
       } // while
+      
       return true;
     } // else
     
@@ -69,38 +71,47 @@ public class MyScanner {
     Main.suTestNum = mStdIn.ReadInt();
     // 讀掉一換行
     mStdIn.ReadChar();
-    // inite scanner
-    GetInputFromeStream();
     
   } // InitPAL()
   
   private String FindLine() throws Throwable {
     StringBuffer tempBuffer = new StringBuffer();
-    while ( !mStdIn.AtEOF() && !mStdIn.AtEOLN() ) {
-      tempBuffer.append( mStdIn.ReadChar() );
-      // System.out.println( tempBuffer.toString() );
-      // System.out.println( tempBuffer.length() );
+    while ( !mStdIn.AtEOF() ) {
+      
+      if ( !mStdIn.AtEOLN() ) {
+        
+        tempBuffer.append( mStdIn.ReadChar() );
+        // System.out.println( tempBuffer.toString() );
+        // System.out.println( tempBuffer.length() );
+      }
+      else {
+        
+        mStdIn.ReadChar();
+        return tempBuffer.toString();
+      }
+      
     } // while
     
     // EOF found
     if ( mStdIn.AtEOF() ) {
       // System.out.println( "inEOF" );
-      is_EndOfFile = true;
+      mIs_EndOfFile = true;
     } // if
     
     // 讀掉換行
-    if ( mStdIn.AtEOLN() && !is_EndOfFile ) {
+    if ( mStdIn.AtEOLN() && !mIs_EndOfFile ) {
       // System.out.println( "inEOL" );
       mStdIn.ReadChar();
     } // if
     
     return tempBuffer.toString();
-  } // FindLine
+  } // FindLine()
   
   private void GetInputFromeStream() throws Throwable
   
   {
-    if ( !mStdIn.AtEOF() && !is_EndOfFile ) {
+    if ( !mIs_EndOfFile ) {
+      
       // init counter
       mCounter = 0;
       mStream = new Vector<Token>();

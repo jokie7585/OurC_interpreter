@@ -21,7 +21,7 @@ public class StringProcessor {
     DeleteComment();
   } // StringProcessor()
   
-  public String GetNextToken() throws Throwable {
+  public String GetNextToken() {
     
     StringBuffer tokenBuffer = new StringBuffer();
     
@@ -38,10 +38,10 @@ public class StringProcessor {
         DelimiterMatcher( mInsBuffer, tokenBuffer );
       } // else
       
-      return tokenBuffer.toString();
     } // if
     
-    throw new EndOfInputException();
+    return tokenBuffer.toString();
+    
   } // GetNextToken()
   
   public boolean HasToken() throws Throwable {
@@ -57,7 +57,7 @@ public class StringProcessor {
     return mInsBuffer.toString();
   } // GetBuffer()
   
-  public void SkipWhiteSpace() throws Throwable {
+  public void SkipWhiteSpace() {
     if ( mInsBuffer.length() > 0 ) {
       while ( Is_whiteSpace( mInsBuffer.charAt( 0 ) ) ) {
         mInsBuffer.delete( 0, 1 );
@@ -80,7 +80,7 @@ public class StringProcessor {
     
   } // DeleteComment()
   
-  public static boolean Is_whiteSpace( char character ) throws Throwable {
+  public static boolean Is_whiteSpace( char character ) {
     char[] whiteSpace = { ' ', '\t', '\n' };
     for ( int i = 0 ; i < whiteSpace.length ; i++ ) {
       if ( character == whiteSpace[ i ] ) {
