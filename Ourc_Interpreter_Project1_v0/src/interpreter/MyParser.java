@@ -116,12 +116,18 @@ public class MyParser {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
+        else {
+          throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+        } // else
       } // if
       else {
         if ( Factor() ) {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
+        else {
+          throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+        } // else
       } // else
     } // while
     
@@ -159,8 +165,10 @@ public class MyParser {
       
       return true;
     } // if
+    else {
+      throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+    } // else
     
-    return false;
   } // NOT_ID_StartArithExpOrBexp()
   
   private boolean BooleanOperator( StringBuffer booleanOperator ) throws Throwable {
@@ -195,8 +203,9 @@ public class MyParser {
       
       return true;
     } // if
-    
-    return false;
+    else {
+      throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+    } // else
     
   } // NOT_ID_StartArithExp()
   
@@ -210,13 +219,17 @@ public class MyParser {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
+        else {
+          throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+        } // else
         
       } // while
       
       return true;
     } // if
-    
-    return false;
+    else {
+      throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+    } // else
     
   } // NOT_ID_StartTerm()
   
@@ -256,13 +269,15 @@ public class MyParser {
           throw new SyntxErrorException( mMyScanner.Peek_NextToken().Get() );
         } // else
       } // if
+      else {
+        throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+      } // else
       
     } // else if
     else {
       throw new SyntxErrorException( mMyScanner.Get_NextToken() );
     } // else
     
-    return false;
   } // NOT_ID_StartFactor()
   
   private boolean ArithExp() throws Throwable {
@@ -280,8 +295,10 @@ public class MyParser {
       
       return true;
     } // if
+    else {
+      throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+    } // else
     
-    return false;
   } // ArithExp()
   
   private boolean Term() throws Throwable {
@@ -302,14 +319,16 @@ public class MyParser {
       
       return true;
     } // if
+    else {
+      throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+    } // else
     
-    return false;
   } // Term()
   
   private boolean Factor() throws Throwable {
     if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sIDENT ) {
       if ( !Register.sRegister.Is_Defined( mMyScanner.Peek_NextToken().Get() ) ) {
-        throw new SegmenticErrorException( mMyScanner.Get_NextToken());
+        throw new SegmenticErrorException( mMyScanner.Get_NextToken() );
       } // if
       
       mMyRuntime.RunACommand( new Command( mMyScanner.Get_NextToken(), Terminal_symbol.sIDENT ) );
@@ -353,12 +372,14 @@ public class MyParser {
           throw new SyntxErrorException( mMyScanner.Peek_NextToken().Get() );
         } // else
       } // if
+      else {
+        throw new SyntxErrorException( mMyScanner.Peek_NextToken().Get() );
+      } // else
     } // else if
     else {
       throw new SyntxErrorException( mMyScanner.Peek_NextToken().Get() );
     } // else
     
-    return false;
   } // Factor()
   
   private boolean Sign() throws Throwable {

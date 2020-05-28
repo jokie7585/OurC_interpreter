@@ -1,5 +1,11 @@
 Program starts...
-> -0.000
-> -0.000
-> Unrecognized token with first char : '.'
-> 0.000
+> Error
+> false
+> true
+> false
+> true
+> true
+> true
+> true
+> true
+> false

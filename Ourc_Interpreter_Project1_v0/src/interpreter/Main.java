@@ -60,7 +60,7 @@ public class Main {
         
       } // while
       
-      System.out.println( "> Program exits..." );
+      System.out.println( "> Program exits...3" );
     } // try
     catch ( EndOfInputException e ) {
       User_interface.PrintResult( e.ToString() );
