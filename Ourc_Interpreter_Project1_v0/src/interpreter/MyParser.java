@@ -29,7 +29,7 @@ public class MyParser {
         throw new ProgramQuitException();
       } // if
       
-      // 緩存 用以檢查
+      // 緩存id 用以檢查
       String tempString = mMyScanner.Get_NextToken();
       mMyRuntime.RunACommand( new Command( tempString, Terminal_symbol.sIDENT ) );
       
@@ -294,6 +294,9 @@ public class MyParser {
           mMyRuntime.RunACommand( new Command( operatorString, Terminal_symbol.sDELIMITER ) );
           
         } // if
+        else {
+          throw new SyntxErrorException( mMyScanner.Get_NextToken() );
+        } // else
         
       } // while
       
@@ -306,7 +309,7 @@ public class MyParser {
   private boolean Factor() throws Throwable {
     if ( mMyScanner.Peek_NextToken().SymbolOf() == Terminal_symbol.sIDENT ) {
       if ( !Register.sRegister.Is_Defined( mMyScanner.Peek_NextToken().Get() ) ) {
-        throw new SegmenticErrorException( mMyScanner.Peek_NextToken().Get() );
+        throw new SegmenticErrorException( mMyScanner.Get_NextToken());
       } // if
       
       mMyRuntime.RunACommand( new Command( mMyScanner.Get_NextToken(), Terminal_symbol.sIDENT ) );

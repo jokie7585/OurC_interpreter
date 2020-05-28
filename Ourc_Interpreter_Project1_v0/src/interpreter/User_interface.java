@@ -35,10 +35,6 @@ public class User_interface {
       else {
         String tempString = String.format( "%.3f", var.mValue.floatValue() );
         
-        if ( var.mValue.floatValue() == 0 && tempString.charAt( 0 ) == '-' ) {
-          tempString = tempString.substring( 1 );
-        } // if
-        
         System.out.println( "> " + tempString );
       } // else
       

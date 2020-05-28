@@ -232,9 +232,9 @@ class MyCPU {
     Variable leftVariable = mLocalVariables.pop();
     
     // System.out.println( "in" );
-    System.out.println( leftVariable.GetVlue() );
-    System.out.println( rightVariable.GetVlue() );
-    System.out.println( leftVariable.GetVlue() - rightVariable.GetVlue() );
+    // System.out.println( leftVariable.GetVlue() );
+    // System.out.println( rightVariable.GetVlue() );
+    // System.out.println( leftVariable.GetVlue() - rightVariable.GetVlue() );
     
     if ( command.mOperand.equals( "=" ) ) {
       if ( leftVariable.GetVlue() - rightVariable.GetVlue() <= 0.0001
